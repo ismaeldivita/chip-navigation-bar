@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu3"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:chipsmenu_iconActiveTintColor="@color/colorAccent"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/menu1"
+        android:icon="@drawable/ic_camera_black"
+        android:title="Feed"
+        app:chipsmenu_iconActiveTintColor="@color/colorPrimary"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/menu2"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        android:title="Favorites"
+        app:chipsmenu_iconActiveTintColor="@color/colorPrimaryDark" />
+
+    <item
+        android:id="@+id/menu4"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings"
+        app:chipsmenu_iconActiveTintColor="@android:color/holo_blue_dark"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/menu5"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:chipsmenu_iconActiveTintColor="@color/colorAccent"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+</menu>

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    ext {
+        kotlinStd = '1.3.31'
+        appcompat = '1.0.2'
+        testJunit = '1.1.1-alpha02'
+        testEspresso = '3.1.1'
+        testRunner = '1.1.1'
+        testArchComponent = '2.0.0'
+        kakao = '2.0.0'
+    }
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinStd"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation "androidx.test:runner:$testRunner"
+    androidTestImplementation "androidx.test:rules:$testRunner"
+    androidTestImplementation "androidx.arch.core:core-testing:$testArchComponent"
+    androidTestImplementation "androidx.test.ext:junit:$testJunit"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$testJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$testEspresso"
+    androidTestImplementation "com.agoda.kakao:kakao:$kakao"
+
+}
