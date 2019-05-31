@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="disabled">#858585</color>
+    <color name="home">#FF0000</color>
+    <color name="discover">#F000F0</color>
+    <color name="search">#00FF00</color>
+    <color name="settings">#0000FF</color>
+</resources>

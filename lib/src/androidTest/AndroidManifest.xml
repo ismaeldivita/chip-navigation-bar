@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ismaeldivita.bubblenavigation">
+
+    <application>
+        <activity android:name="ismaeldivita.bubblenavigation.robot.MenuTestActivity" />
+    </application>
+
+</manifest>

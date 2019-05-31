@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"
+        app:chipsmenu_iconActiveTintColor="@color/home"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/discover"
+        android:title="@string/discover"
+        android:icon="@drawable/ic_discover"
+        app:chipsmenu_iconActiveTintColor="@color/discover"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        app:chipsmenu_iconActiveTintColor="@color/search"
+        app:chipsmenu_iconTintMode="src_in"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"
+        app:chipsmenu_iconActiveTintColor="@color/settings"
+        app:chipsmenu_iconTintMode="src_in"/>
+</menu>
