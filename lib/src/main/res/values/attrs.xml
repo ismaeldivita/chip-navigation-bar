@@ -14,34 +14,27 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="ChipsMenuView">
-        <attr name="chipsmenu_menuResource" format="reference" />
-        <attr name="chipsmenu_hideOnScroll" format="boolean" />
-        <attr name="chipsmenu_applyBottomInset" format="boolean" />
-        <attr name="chipsmenu_tabletModeEnabled" format="boolean" />
+    <declare-styleable name="BubbleMenu">
+        <attr name="bnv_badgeColor" format="color" />
+        <attr name="bnv_disabledColor" format="color" />
+        <attr name="bnv_unselectedColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="ChipsMenu">
-        <attr name="chipsmenu_badgeColor" format="color" />
-        <attr name="chipsmenu_disabledColor" format="color" />
-        <attr name="chipsmenu_unselectedColor" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="ChipsMenuItem">
+    <declare-styleable name="BubbleMenuItem">
         <attr name="android:id" />
         <attr name="android:title" />
         <attr name="android:icon" />
         <attr name="android:enabled" />
-        <attr name="chipsmenu_iconActiveTintColor" format="color" />
-        <attr name="chipsmenu_iconTintMode">
+        <attr name="bnv_iconActiveTintColor" format="color" />
+        <attr name="bnv_iconTintMode">
             <enum name="src_over" value="3" />
             <enum name="src_in" value="5" />
             <enum name="src_atop" value="9" />
             <enum name="multiply" value="14" />
             <enum name="screen" value="15" />
         </attr>
-        <attr name="chipsmenu_textActiveColor" format="color" />
-        <attr name="chipsmenu_chipsBackgroundColor" format="color" />
+        <attr name="bnv_textActiveColor" format="color" />
+        <attr name="bnv_backgroundColor" format="color" />
     </declare-styleable>
 
 </resources>

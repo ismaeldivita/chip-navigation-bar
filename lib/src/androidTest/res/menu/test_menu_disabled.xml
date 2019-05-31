@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:chipsmenu_disabledColor="@color/disabled">
+    app:bnv_disabledColor="@color/disabled">
 
     <item
         android:id="@+id/home"
         android:title="@string/home"
         android:icon="@drawable/ic_home"
         android:enabled="false"
-        app:chipsmenu_iconActiveTintColor="@color/home"
-        app:chipsmenu_iconTintMode="src_in"/>
+        app:bnv_iconActiveTintColor="@color/home"
+        app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/discover"
         android:title="@string/discover"
         android:icon="@drawable/ic_discover"
         android:enabled="false"
-        app:chipsmenu_iconActiveTintColor="@color/discover"
-        app:chipsmenu_iconTintMode="src_in"/>
+        app:bnv_iconActiveTintColor="@color/discover"
+        app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/search"
         android:title="@string/search"
         android:icon="@drawable/ic_search"
-        app:chipsmenu_iconActiveTintColor="@color/search"
-        app:chipsmenu_iconTintMode="src_in"/>
+        app:bnv_iconActiveTintColor="@color/search"
+        app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
-        app:chipsmenu_iconActiveTintColor="@color/settings"
-        app:chipsmenu_iconTintMode="src_in"/>
+        app:bnv_iconActiveTintColor="@color/settings"
+        app:bnv_iconTintMode="src_in"/>
 </menu>

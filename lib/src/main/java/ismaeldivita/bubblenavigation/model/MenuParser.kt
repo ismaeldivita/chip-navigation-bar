@@ -56,7 +56,7 @@ internal class MenuParser(private val context: Context) {
             val name = parser.name
             when {
                 eventType == START_TAG && name == XML_MENU_TAG -> {
-                    val sAttr = context.obtainStyledAttributes(attrs, R.styleable.ChipsMenu)
+                    val sAttr = context.obtainStyledAttributes(attrs, R.styleable.BubbleMenu)
                     badgeColor = readBadgeColor(sAttr)
                     disabledColor = readDisabledColor(sAttr)
                     unselectedColor = readUnselectedColor(sAttr)
@@ -87,17 +87,17 @@ internal class MenuParser(private val context: Context) {
     }
 
     private fun parseMenuItem(attrs: AttributeSet): MenuItem {
-        val sAttr = context.obtainStyledAttributes(attrs, R.styleable.ChipsMenuItem)
+        val sAttr = context.obtainStyledAttributes(attrs, R.styleable.BubbleMenuItem)
 
         val item = MenuItem(
-            id = sAttr.getResourceId(R.styleable.ChipsMenuItem_android_id, 0),
-            title = sAttr.getText(R.styleable.ChipsMenuItem_android_title),
-            icon = sAttr.getResourceId(R.styleable.ChipsMenuItem_android_icon, 0),
-            enabled = sAttr.getBoolean(R.styleable.ChipsMenuItem_android_enabled, true),
+            id = sAttr.getResourceId(R.styleable.BubbleMenuItem_android_id, 0),
+            title = sAttr.getText(R.styleable.BubbleMenuItem_android_title),
+            icon = sAttr.getResourceId(R.styleable.BubbleMenuItem_android_icon, 0),
+            enabled = sAttr.getBoolean(R.styleable.BubbleMenuItem_android_enabled, true),
             iconColor = readIconActiveColor(sAttr),
             tintMode = readIconTintMode(sAttr),
             textColor = readTextActiveColor(sAttr),
-            backgroundColor = readChipsBackgroundColor(sAttr)
+            backgroundColor = readBackgroundColor(sAttr)
         )
 
         sAttr.recycle()
@@ -105,7 +105,7 @@ internal class MenuParser(private val context: Context) {
     }
 
     private fun readIconTintMode(sAttr: TypedArray): PorterDuff.Mode? =
-        when (sAttr.getInt(R.styleable.ChipsMenuItem_chipsmenu_iconTintMode, -1)) {
+        when (sAttr.getInt(R.styleable.BubbleMenuItem_bnv_iconTintMode, -1)) {
             3 -> PorterDuff.Mode.SRC_OVER
             5 -> PorterDuff.Mode.SRC_IN
             9 -> PorterDuff.Mode.SRC_ATOP
@@ -116,32 +116,32 @@ internal class MenuParser(private val context: Context) {
         }
 
     private fun readIconActiveColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipsMenuItem_chipsmenu_iconActiveTintColor,
+        R.styleable.BubbleMenuItem_bnv_iconActiveTintColor,
         context.getValueFromAttr(R.attr.colorAccent)
     )
 
     private fun readBadgeColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipsMenu_chipsmenu_badgeColor,
-        ContextCompat.getColor(context, R.color.chipsmenu_default_badge_tint_color)
+        R.styleable.BubbleMenu_bnv_badgeColor,
+        ContextCompat.getColor(context, R.color.bnv_default_badge_tint_color)
     )
 
     private fun readDisabledColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipsMenu_chipsmenu_disabledColor,
+        R.styleable.BubbleMenu_bnv_disabledColor,
         context.getValueFromAttr(R.attr.colorButtonNormal)
     )
 
     private fun readUnselectedColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipsMenu_chipsmenu_unselectedColor,
-        ContextCompat.getColor(context, R.color.chipsmenu_default_unselected_color)
+        R.styleable.BubbleMenu_bnv_unselectedColor,
+        ContextCompat.getColor(context, R.color.bnv_default_unselected_color)
     )
 
     private fun readTextActiveColor(sAttr: TypedArray): Int =
         sAttr.getColor(
-            R.styleable.ChipsMenuItem_chipsmenu_textActiveColor,
+            R.styleable.BubbleMenuItem_bnv_textActiveColor,
             readIconActiveColor(sAttr)
         )
 
-    private fun readChipsBackgroundColor(sAttr: TypedArray): Int {
+    private fun readBackgroundColor(sAttr: TypedArray): Int {
         val iconTintColor = readIconActiveColor(sAttr)
         val defaultColor = Color.argb(
             (Color.alpha(iconTintColor) * 0.15).toInt(),
@@ -150,7 +150,7 @@ internal class MenuParser(private val context: Context) {
             Color.blue(iconTintColor)
         )
         return sAttr.getColor(
-            R.styleable.ChipsMenuItem_chipsmenu_chipsBackgroundColor,
+            R.styleable.BubbleMenuItem_bnv_backgroundColor,
             defaultColor
         )
     }
