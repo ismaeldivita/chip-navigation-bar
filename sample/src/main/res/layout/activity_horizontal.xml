@@ -2,65 +2,31 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".HorizontalModeActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:orientation="horizontal">
-
-            <ismaeldivita.bubblenavigation.BubbleNavigationView
-                android:id="@+id/bottom_menu_2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#FFF"
-                android:elevation="10dp"
-                app:bnv_orientationMode="vertical"
-                app:bnv_addTopInset="true"
-                app:bnv_hideOnScroll="false"
-                app:bnv_menuResource="@menu/test" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="800dp"
-                android:text="DISABLED / ENABLED" />
-
-            <Button
-                android:id="@+id/hideBT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:text="HIDE" />
-
-            <Button
-                android:id="@+id/showBT"
-                android:layout_gravity="top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SHOW" />
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="42sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"/>
 
     <ismaeldivita.bubblenavigation.BubbleNavigationView
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#FFF"
-        android:elevation="10dp"
-        app:bnv_orientationMode="horizontal"
+        android:background="@color/white"
+        android:elevation="12dp"
         app:bnv_addBottomInset="true"
-        app:bnv_hideOnScroll="true"
-        app:bnv_menuResource="@menu/test" />
+        app:bnv_addLeftInset="true"
+        app:bnv_menuResource="@menu/test"
+        app:bnv_orientationMode="horizontal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
