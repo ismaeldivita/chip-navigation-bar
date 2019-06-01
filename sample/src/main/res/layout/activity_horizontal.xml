@@ -25,7 +25,6 @@
         android:background="@color/white"
         android:elevation="12dp"
         app:bnv_addBottomInset="true"
-        app:bnv_addLeftInset="true"
         app:bnv_menuResource="@menu/test"
         app:bnv_orientationMode="horizontal" />
 

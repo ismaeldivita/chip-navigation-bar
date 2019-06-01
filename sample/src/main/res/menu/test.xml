@@ -6,27 +6,24 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="Home"
-        app:bnv_iconActiveTintColor="@color/home"
-        app:bnv_iconTintMode="src_in"/>
+        app:bnv_iconColor="@color/home"/>
 
     <item
         android:id="@+id/activity"
         android:icon="@drawable/ic_activity"
         android:title="Activity"
-        app:bnv_iconActiveTintColor="@color/activity"
-        app:bnv_iconTintMode="src_in"/>
+        app:bnv_iconColor="@color/activity"/>
 
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_heart"
         android:title="Favorites"
-        app:bnv_iconActiveTintColor="@color/favorites" />
+        app:bnv_iconColor="@color/favorites" />
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
         android:title="Settings"
-        app:bnv_iconActiveTintColor="@color/settings"
-        app:bnv_iconTintMode="src_in"/>
+        app:bnv_iconColor="@color/settings" />
 
 </menu>

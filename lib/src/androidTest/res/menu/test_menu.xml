@@ -6,27 +6,27 @@
         android:id="@+id/home"
         android:title="@string/home"
         android:icon="@drawable/ic_home"
-        app:bnv_iconActiveTintColor="@color/home"
+        app:bnv_iconColor="@color/home"
         app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/discover"
         android:title="@string/discover"
         android:icon="@drawable/ic_discover"
-        app:bnv_iconActiveTintColor="@color/discover"
+        app:bnv_iconColor="@color/discover"
         app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/search"
         android:title="@string/search"
         android:icon="@drawable/ic_search"
-        app:bnv_iconActiveTintColor="@color/search"
+        app:bnv_iconColor="@color/search"
         app:bnv_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
-        app:bnv_iconActiveTintColor="@color/settings"
+        app:bnv_iconColor="@color/settings"
         app:bnv_iconTintMode="src_in"/>
 </menu>

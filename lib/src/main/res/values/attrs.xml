@@ -25,7 +25,7 @@
         <attr name="android:title" />
         <attr name="android:icon" />
         <attr name="android:enabled" />
-        <attr name="bnv_iconActiveTintColor" format="color" />
+        <attr name="bnv_iconColor" format="color" />
         <attr name="bnv_iconTintMode">
             <enum name="src_over" value="3" />
             <enum name="src_in" value="5" />
