@@ -185,7 +185,6 @@ class BubbleNavigationView @JvmOverloads constructor(
      */
     fun collapse() {
         if (orientationMode == MenuOrientation.VERTICAL) {
-            beginDelayedTransitionOnParent(ChangeBounds())
             forEachChild {
                 (it as? VerticalMenuItemView)?.collapse()
             }
@@ -197,7 +196,6 @@ class BubbleNavigationView @JvmOverloads constructor(
      */
     fun expand() {
         if (orientationMode == MenuOrientation.VERTICAL) {
-            beginDelayedTransitionOnParent(ChangeBounds())
             forEachChild {
                 (it as? VerticalMenuItemView)?.expand()
             }

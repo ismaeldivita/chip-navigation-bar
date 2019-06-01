@@ -36,12 +36,12 @@ TODO
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="@color/white"
-    app:bnv_menuResource="@menu/bottom_menu"
-    app:bnv_orientationMode="horizontal" />
+    app:bnv_menuResource="@menu/bottom_menu" />
 ```
 
 ## Vertical orientation
 TODO
 
-## License
-TODO
+<p align="center">
+    <img width="500" src="https://user-images.githubusercontent.com/7879502/58742016-96776780-8418-11e9-97ff-3783dc6d9b79.gif">
+</center>

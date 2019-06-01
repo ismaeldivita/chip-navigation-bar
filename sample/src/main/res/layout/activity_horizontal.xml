@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
-        android:elevation="12dp"
+        android:elevation="16dp"
         app:bnv_addBottomInset="true"
         app:bnv_menuResource="@menu/test"
         app:bnv_orientationMode="horizontal" />
