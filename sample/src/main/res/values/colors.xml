@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="blank">#696969</color>
 
     <color name="home">#2196F3</color>
     <color name="activity">#673AB7</color>

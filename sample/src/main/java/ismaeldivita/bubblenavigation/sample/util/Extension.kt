@@ -1,7 +1,24 @@
 package ismaeldivita.bubblenavigation.sample.util
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.view.View
 import android.view.WindowInsets
+
+/**
+ *  Start a color animation transition on the view background
+ *
+ *  @param from source color
+ *  @param to target color
+ */
+internal fun View.colorAnimation(from: Int, to: Int) {
+    ValueAnimator.ofObject(ArgbEvaluator(), from, to).apply {
+        duration = 300
+        addUpdateListener { animator ->
+            setBackgroundColor(animator.animatedValue as Int)
+        }
+    }.start()
+}
 
 /**
  *  Add the window inset to current padding

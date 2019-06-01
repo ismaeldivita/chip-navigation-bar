@@ -2,7 +2,7 @@
 TODO
 
 ## Usage
-<img align="right" width="350" src="https://user-images.githubusercontent.com/7879502/58740933-ab013300-840b-11e9-9d03-a09f043680ce.gif">
+<img align="right" width="350" src="https://user-images.githubusercontent.com/7879502/58746357-4f5b9780-8455-11e9-8efd-62f064ce0a34.gif">
 
 ```xml
 <!-- bottom_menu.xml -->
@@ -38,10 +38,36 @@ TODO
     android:background="@color/white"
     app:bnv_menuResource="@menu/bottom_menu" />
 ```
+<br clear="right"/>
 
-## Vertical orientation
+## Public API and custom attributes
 TODO
 
-<p align="center">
-    <img width="500" src="https://user-images.githubusercontent.com/7879502/58742016-96776780-8418-11e9-97ff-3783dc6d9b79.gif">
-</center>
+## Vertical orientation
+
+`BubbleNavigationView` supports a vertical orientation mode. This is very useful for 
+tablets or devices with large screens.
+
+<img width="350" align="right" src="https://user-images.githubusercontent.com/7879502/58746359-52568800-8455-11e9-9fa9-4cf49abeb4ee.gif"/>
+
+Just add the attribute `bnv_orientationMode` to your xml:
+```xml
+<ismaeldivita.bubblenavigation.BubbleNavigationView
+    android:id="@+id/bottom_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:bnv_menuResource="@menu/test"
+    app:bnv_orientationMode="vertical" />
+```
+... or programmatically call the method `setMenuOrientation` before inflate the menu:
+```kotlin
+menu.setMenuOrientation(MenuOrientation.VERTICAL)
+menu.setMenuResource(R.menu.my_menu)
+```
+
+ >**Note:** The view exposes methods to expand and collapse the menu but we don't provide the implementation for the toggle button. Check the sample for a basic implementation.
+
+ <br clear="right"/>
+
+## License
+TODO

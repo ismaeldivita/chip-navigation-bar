@@ -1,13 +1,12 @@
 package ismaeldivita.bubblenavigation.sample
 
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import ismaeldivita.bubblenavigation.BubbleNavigationView
+import ismaeldivita.bubblenavigation.sample.util.colorAnimation
 
 class HorizontalModeActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class HorizontalModeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horizontal)
 
-        lastColor = ContextCompat.getColor(this, R.color.white)
+        lastColor = ContextCompat.getColor(this, R.color.blank)
 
         menu.setOnItemSelectedListener(object : BubbleNavigationView.OnItemSelectedListener {
             override fun onItemSelected(id: Int) {
@@ -33,21 +32,12 @@ class HorizontalModeActivity : AppCompatActivity() {
                     else -> R.color.white to ""
                 }
                 val color = ContextCompat.getColor(this@HorizontalModeActivity, option.first)
-                colorAnimation(lastColor, color)
+                container.colorAnimation(lastColor, color)
+                lastColor = color
 
                 title.text = option.second
             }
         })
-    }
-
-    private fun colorAnimation(from: Int, to: Int) {
-        lastColor = to
-        ValueAnimator.ofObject(ArgbEvaluator(), from, to).apply {
-            duration = 300
-            addUpdateListener { animator ->
-                container.setBackgroundColor(animator.animatedValue as Int)
-            }
-        }.start()
     }
 
 }
