@@ -40,8 +40,79 @@ TODO
 ```
 <br clear="right"/>
 
-## Public API and custom attributes
-TODO
+## XML custom attributes
+### Menu xml custom attributes
+
+| attribute|description|default|
+|----------|-------------|------|
+| `bnv_disabledColor` |color used for the disable state|`R.attr.colorButtonNormal`|
+| `bnv_unselectedColor` |color used for unselected state|`#696969`|
+
+```xml
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:bnv_disabledColor="#606060"
+    app:bnv_unselectedColor="@color/my_unselected_color">
+
+    ...
+
+</menu>
+```
+### MenuItem xml custom attributes
+| attribute|description|default|
+|----------|-------------|------ |
+| `android:id`|id|**required**|
+| `android:enabled`|enabled state|true|
+| `android:icon`|icon drawable|**required**|
+| `android:title`|label string|**required**|
+| `bnv_iconColor`|color used to tint the icon on selected state|`R.attr.colorAccent`|
+| `bnv_icontTintMode`|`PorterDuff.Mode` to apply the color. Possible values: [src_over, src_in, src_atop, multiply, screen]|`null`|
+| `bnv_textColor`|color used for the label on selected state|same color used for `bnv_iconColor`|
+| `bnv_backgroundColor`|color used for the bubble background|same color used for `bnv_iconColor` with 15% of alpha
+
+```xml
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:bnv_backgroundColor="@color/home_bubble"
+        app:bnv_iconColor="@color/home_icon"
+        app:bnv_iconTintMode="src_in"
+        app:bnv_textColor="@color/home_label" />
+
+        ...
+
+</menu>
+```
+
+### BubbleNavigationView xml custom attributes
+| attribute|description|default|
+|----------|-------------|------ |
+| `bnv_menuResource`|menu resource file|optional since you can set this programmatically|
+| `bnv_hideOnScroll`|flag to enable the reveal and dismiss behavior on user scrolls. Only effective if the view is inside a `CoordinatorLayout`|false|
+| `bnv_orientationMode`|menu orientation. Posisble values: [horizontal, vertical]|horizontal|
+| `bnv_addBottomInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent navigation bar|false|
+| `bnv_addTopInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent status bar with the vertical mode|false|
+| `bnv_addLeftInset`|property to enable the sum of the window insets on the current start padding, useful when you're using the translucent navigation bar with landscape|false|
+| `bnv_addRightInset`|property to enable the sum of the window insets on the current end padding, useful when you're using the translucent navigation bar with landscape|false|
+
+```xml
+<ismaeldivita.bubblenavigation.BubbleNavigationView
+    android:id="@+id/menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:bnv_menuResource="@menu/bottom_menu"
+    app:bnv_hideOnScroll="true"
+    app:bnv_orientationMode="horizontal"
+    app:bnv_addBottomInset="false"
+    app:bnv_addLeftInset="false"
+    app:bnv_addRightInset="false"
+    app:bnv_addTopInset="false" />
+```
 
 ## Vertical orientation
 
