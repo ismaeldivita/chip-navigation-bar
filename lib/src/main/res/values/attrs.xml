@@ -33,7 +33,7 @@
             <enum name="multiply" value="14" />
             <enum name="screen" value="15" />
         </attr>
-        <attr name="bnv_textActiveColor" format="color" />
+        <attr name="bnv_textColor" format="color" />
         <attr name="bnv_backgroundColor" format="color" />
     </declare-styleable>
 

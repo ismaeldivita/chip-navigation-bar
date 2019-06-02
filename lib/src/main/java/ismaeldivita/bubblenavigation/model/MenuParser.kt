@@ -137,7 +137,7 @@ internal class MenuParser(private val context: Context) {
 
     private fun readTextActiveColor(sAttr: TypedArray): Int =
         sAttr.getColor(
-            R.styleable.BubbleMenuItem_bnv_textActiveColor,
+            R.styleable.BubbleMenuItem_bnv_textColor,
             readIconActiveColor(sAttr)
         )
 
