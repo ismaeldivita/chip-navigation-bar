@@ -29,12 +29,12 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <ismaeldivita.bubblenavigation.BubbleNavigationView
+    <ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:bnv_hideOnScroll="true"
-        app:bnv_orientationMode="horizontal" />
+        app:cnb_hideOnScroll="true"
+        app:cnb_orientationMode="horizontal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

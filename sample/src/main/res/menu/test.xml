@@ -6,24 +6,24 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="Home"
-        app:bnv_iconColor="@color/home"/>
+        app:cnb_iconColor="@color/home"/>
 
     <item
         android:id="@+id/activity"
         android:icon="@drawable/ic_activity"
         android:title="Activity"
-        app:bnv_iconColor="@color/activity"/>
+        app:cnb_iconColor="@color/activity"/>
 
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_heart"
         android:title="Favorites"
-        app:bnv_iconColor="@color/favorites" />
+        app:cnb_iconColor="@color/favorites" />
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
         android:title="Settings"
-        app:bnv_iconColor="@color/settings" />
+        app:cnb_iconColor="@color/settings" />
 
 </menu>

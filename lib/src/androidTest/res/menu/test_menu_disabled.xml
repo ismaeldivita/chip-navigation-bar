@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:bnv_disabledColor="@color/disabled">
+    app:cnb_disabledColor="@color/disabled">
 
     <item
         android:id="@+id/home"
         android:title="@string/home"
         android:icon="@drawable/ic_home"
         android:enabled="false"
-        app:bnv_iconColor="@color/home"
-        app:bnv_iconTintMode="src_in"/>
+        app:cnb_iconColor="@color/home"
+        app:cnb_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/discover"
         android:title="@string/discover"
         android:icon="@drawable/ic_discover"
         android:enabled="false"
-        app:bnv_iconColor="@color/discover"
-        app:bnv_iconTintMode="src_in"/>
+        app:cnb_iconColor="@color/discover"
+        app:cnb_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/search"
         android:title="@string/search"
         android:icon="@drawable/ic_search"
-        app:bnv_iconColor="@color/search"
-        app:bnv_iconTintMode="src_in"/>
+        app:cnb_iconColor="@color/search"
+        app:cnb_iconTintMode="src_in"/>
 
     <item
         android:id="@+id/settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
-        app:bnv_iconColor="@color/settings"
-        app:bnv_iconTintMode="src_in"/>
+        app:cnb_iconColor="@color/settings"
+        app:cnb_iconTintMode="src_in"/>
 </menu>

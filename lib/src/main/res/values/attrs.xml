@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="BubbleNavigationView">
-        <attr name="bnv_menuResource" format="reference" />
-        <attr name="bnv_hideOnScroll" format="boolean" />
-        <attr name="bnv_addBottomInset" format="boolean" />
-        <attr name="bnv_addTopInset" format="boolean" />
-        <attr name="bnv_addLeftInset" format="boolean" />
-        <attr name="bnv_addRightInset" format="boolean" />
-        <attr name="bnv_orientationMode">
+    <declare-styleable name="ChipNavigationBar">
+        <attr name="cnb_menuResource" format="reference" />
+        <attr name="cnb_hideOnScroll" format="boolean" />
+        <attr name="cnb_addBottomInset" format="boolean" />
+        <attr name="cnb_addTopInset" format="boolean" />
+        <attr name="cnb_addLeftInset" format="boolean" />
+        <attr name="cnb_addRightInset" format="boolean" />
+        <attr name="cnb_orientationMode">
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="BubbleMenu">
-        <attr name="bnv_badgeColor" format="color" />
-        <attr name="bnv_disabledColor" format="color" />
-        <attr name="bnv_unselectedColor" format="color" />
+    <declare-styleable name="ChipMenu">
+        <attr name="cnb_badgeColor" format="color" />
+        <attr name="cnb_disabledColor" format="color" />
+        <attr name="cnb_unselectedColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="BubbleMenuItem">
+    <declare-styleable name="ChipMenuItem">
         <attr name="android:id" />
         <attr name="android:title" />
         <attr name="android:icon" />
         <attr name="android:enabled" />
-        <attr name="bnv_iconColor" format="color" />
-        <attr name="bnv_iconTintMode">
+        <attr name="cnb_iconColor" format="color" />
+        <attr name="cnb_iconTintMode">
             <enum name="src_over" value="3" />
             <enum name="src_in" value="5" />
             <enum name="src_atop" value="9" />
             <enum name="multiply" value="14" />
             <enum name="screen" value="15" />
         </attr>
-        <attr name="bnv_textColor" format="color" />
-        <attr name="bnv_backgroundColor" format="color" />
+        <attr name="cnb_textColor" format="color" />
+        <attr name="cnb_backgroundColor" format="color" />
     </declare-styleable>
 
 </resources>

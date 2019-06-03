@@ -16,15 +16,15 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <ismaeldivita.bubblenavigation.BubbleNavigationView
+        <ismaeldivita.chipnavigation.ChipNavigationBar
             android:id="@+id/bottom_menu"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:elevation="16dp"
-            app:bnv_addTopInset="true"
-            app:bnv_menuResource="@menu/test"
-            app:bnv_orientationMode="vertical" />
+            app:cnb_addTopInset="true"
+            app:cnb_menuResource="@menu/test"
+            app:cnb_orientationMode="vertical" />
 
         <ImageView
             android:id="@+id/expand_button"

@@ -17,15 +17,15 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="36dp"/>
 
-    <ismaeldivita.bubblenavigation.BubbleNavigationView
+    <ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
         android:elevation="16dp"
-        app:bnv_addBottomInset="true"
-        app:bnv_menuResource="@menu/test"
-        app:bnv_orientationMode="horizontal" />
+        app:cnb_addBottomInset="true"
+        app:cnb_menuResource="@menu/test"
+        app:cnb_orientationMode="horizontal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ismaeldivita.bubblenavigation">
+    package="ismaeldivita.chipnavigation">
 
     <application>
-        <activity android:name="ismaeldivita.bubblenavigation.robot.MenuTestActivity" />
+        <activity android:name="ismaeldivita.chipnavigation.robot.MenuTestActivity" />
     </application>
 
 </manifest>
