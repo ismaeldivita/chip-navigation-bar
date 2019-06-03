@@ -22,22 +22,20 @@ class HorizontalModeActivity : AppCompatActivity() {
 
         lastColor = ContextCompat.getColor(this, R.color.blank)
 
-        menu.setOnItemSelectedListener(object : BubbleNavigationView.OnItemSelectedListener {
-            override fun onItemSelected(id: Int) {
-                val option = when (id) {
-                    R.id.home -> R.color.home to "Home"
-                    R.id.activity -> R.color.activity to "Activity"
-                    R.id.favorites -> R.color.favorites to "Favorites"
-                    R.id.settings -> R.color.settings to "Settings"
-                    else -> R.color.white to ""
-                }
-                val color = ContextCompat.getColor(this@HorizontalModeActivity, option.first)
-                container.colorAnimation(lastColor, color)
-                lastColor = color
-
-                title.text = option.second
+        menu.setOnItemSelectedListener { id ->
+            val option = when (id) {
+                R.id.home -> R.color.home to "Home"
+                R.id.activity -> R.color.activity to "Activity"
+                R.id.favorites -> R.color.favorites to "Favorites"
+                R.id.settings -> R.color.settings to "Settings"
+                else -> R.color.white to ""
             }
-        })
+            val color = ContextCompat.getColor(this@HorizontalModeActivity, option.first)
+            container.colorAnimation(lastColor, color)
+            lastColor = color
+
+            title.text = option.second
+        }
     }
 
 }

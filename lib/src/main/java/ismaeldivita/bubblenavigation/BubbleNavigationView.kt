@@ -97,7 +97,7 @@ class BubbleNavigationView @JvmOverloads constructor(
     }
 
     /**
-     * Set the enabled state of the menu item if the provided [id] was found
+     * Set the enabled state for the menu item with the provided [id]
      *
      * @param id menu item id
      * @param isEnabled true if this view is enabled, false otherwise
@@ -108,7 +108,9 @@ class BubbleNavigationView @JvmOverloads constructor(
 
     /**
      * Remove the selected state from the current item and set the selected state to true
-     * of the menu item for the [id]
+     * for the menu item with the [id]
+     *
+     * This event will not be propagated to the current [OnItemSelectedListener]
      *
      * @param id menu item id
      */
@@ -123,7 +125,7 @@ class BubbleNavigationView @JvmOverloads constructor(
 
     /**
      * Set the enabled state for the hide on scroll [CoordinatorLayout.Behavior].
-     * The behavior is only active when orientation orientationMode is HORIZONTAL
+     * The behavior is only active when orientation mode is HORIZONTAL
      *
      * @param isEnabled True if this view is enabled, false otherwise
      */
@@ -160,6 +162,19 @@ class BubbleNavigationView @JvmOverloads constructor(
      */
     fun setOnItemSelectedListener(listener: OnItemSelectedListener) {
         this.listener = listener
+    }
+
+    /**
+     * Register a callback to be invoked when a menu item is selected
+     *
+     * @param block The callback that will run
+     */
+    fun setOnItemSelectedListener(block: (Int) -> Unit) {
+        setOnItemSelectedListener(object : OnItemSelectedListener {
+            override fun onItemSelected(id: Int) {
+                block(id)
+            }
+        })
     }
 
     /**

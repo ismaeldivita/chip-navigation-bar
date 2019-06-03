@@ -113,6 +113,20 @@ TODO
     app:bnv_addRightInset="false"
     app:bnv_addTopInset="false" />
 ```
+## Public API
+
+| method|description|
+|---------------|----|
+|`setMenuResource(@MenuRes menuRes: Int)` | Inflate a menu from the specified XML resource|
+|`setMenuOrientation(menuOrientation: MenuOrientation)` | Set the menu orientation|
+|`setItemEnabled(id: Int, isEnabled: Boolean)` | Set the enabled state for the menu item with the provided [id]|
+|`setItemSelected(id: Int)` | Remove the selected state from the current item and set the selected state to true for the menu item with the [id]|
+|`setHideOnScroll(isEnabled: Boolean)`|Set the enabled state for the hide on scroll [CoordinatorLayout.Behavior]. The behavior is only active when orientation mode is HORIZONTAL|
+|`setOnItemSelectedListener(listener: OnItemSelectedListener)`|Register a callback to be invoked when a menu item is selected|
+|`show()`|Show menu if the orientationMode is HORIZONTAL otherwise, do nothing|
+|`hide()`|Hide menu if the orientationMode is HORIZONTAL otherwise, do nothing|
+|`collapse()`|Collapse the menu items if orientationMode is VERTICAL otherwise, do nothing|
+|`expand()`|Expand the menu items if orientationMode is VERTICAL otherwise, do nothing|
 
 ## Vertical orientation
 
