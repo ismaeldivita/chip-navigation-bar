@@ -16,7 +16,7 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <ismaeldivita.chipnavigation.ChipNavigationBar
+        <com.ismaeldivita.chipnavigation.ChipNavigationBar
             android:id="@+id/bottom_menu"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

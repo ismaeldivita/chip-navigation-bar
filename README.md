@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/ismaeldivita/maven/chip-navigation-bar/images/download.svg) ](https://bintray.com/ismaeldivita/maven/chip-navigation-bar/_latestVersion)
+
 # Chip Navigation Bar
 A navigation bar widget inspired on Google [Bottom Navigation](https://material.io/design/components/bottom-navigation.html) mixed with [Chips](https://material.io/design/components/chips.html) component.
 
@@ -31,7 +33,7 @@ A navigation bar widget inspired on Google [Bottom Navigation](https://material.
 </menu>
 
 <!-- layout.xml -->
-<ismaeldivita.chipnavigation.ChipNavigationBar
+<com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
@@ -101,7 +103,7 @@ A navigation bar widget inspired on Google [Bottom Navigation](https://material.
 | `cnb_addRightInset`|property to enable the sum of the window insets on the current end padding, useful when you're using the translucent navigation bar with landscape|false|
 
 ```xml
-<ismaeldivita.chipnavigation.ChipNavigationBar
+<com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:id="@+id/menu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -137,7 +139,7 @@ tablets or devices with large screens.
 
 Just add the attribute `cnb_orientationMode` to your xml:
 ```xml
-<ismaeldivita.chipnavigation.ChipNavigationBar
+<com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:id="@+id/bottom_menu"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
@@ -153,6 +155,15 @@ menu.setMenuResource(R.menu.my_menu)
  >**Note:** The view exposes methods to expand and collapse the menu but we don't provide the implementation for the toggle button. Check the sample for a basic implementation.
 
  <br clear="right"/>
+
+## Installation
+
+**Required Android Lollipop - API Level 22**
+
+### Gradle
+```gradle
+implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:0.0.1'
+```
 
 ## License
 MIT License

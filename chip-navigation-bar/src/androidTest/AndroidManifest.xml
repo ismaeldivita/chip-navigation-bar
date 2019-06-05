@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ismaeldivita.chipnavigation">
+
+    <application>
+        <activity android:name="com.ismaeldivita.chipnavigation.robot.MenuTestActivity" />
+    </application>
+
+</manifest>

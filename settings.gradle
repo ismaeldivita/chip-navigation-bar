@@ -1,1 +1,1 @@
-include ':sample', ':lib'
+include ':sample', ':chip-navigation-bar'
