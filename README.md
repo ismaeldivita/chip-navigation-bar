@@ -158,11 +158,25 @@ menu.setMenuResource(R.menu.my_menu)
 
 ## Installation
 
-**Required Android Lollipop - API Level 22**
+**Required**
+- AndroidX - See [migration guide](https://developer.android.com/jetpack/androidx/migrate)
+- Android Lollipop - API Level 22
 
 ### Gradle
+
+Make sure that the repositories section includes JCenter
 ```gradle
-implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:0.0.1'
+buildscript {
+    ...
+    repositories {
+        jcenter()
+        ...
+    }
+```
+Add the library to the dependencies:
+
+```gradle
+implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.0.0'
 ```
 
 ## License
