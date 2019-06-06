@@ -42,6 +42,32 @@ A navigation bar widget inspired on Google [Bottom Navigation](https://material.
 ```
 <br clear="right"/>
 
+## Vertical orientation
+
+`ChipNavigationBar` supports a vertical orientation mode. This is very useful for
+tablets or devices with large screens.
+
+<img width="350" align="right" src="https://user-images.githubusercontent.com/7879502/58746359-52568800-8455-11e9-9fa9-4cf49abeb4ee.gif"/>
+
+Just add the attribute `cnb_orientationMode` to your xml:
+```xml
+<com.ismaeldivita.chipnavigation.ChipNavigationBar
+    android:id="@+id/bottom_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:cnb_menuResource="@menu/test"
+    app:cnb_orientationMode="vertical" />
+```
+... or programmatically call the method `setMenuOrientation` before inflate the menu:
+```kotlin
+menu.setMenuOrientation(MenuOrientation.VERTICAL)
+menu.setMenuResource(R.menu.my_menu)
+```
+
+ >**Note:** The view exposes methods to expand and collapse the menu but we don't provide the implementation for the toggle button. Check the sample for a basic implementation.
+
+ <br clear="right"/>
+
 ## XML custom attributes
 ### Menu xml custom attributes
 
@@ -130,39 +156,27 @@ A navigation bar widget inspired on Google [Bottom Navigation](https://material.
 |`collapse()`|Collapse the menu items if orientationMode is VERTICAL otherwise, do nothing|
 |`expand()`|Expand the menu items if orientationMode is VERTICAL otherwise, do nothing|
 
-## Vertical orientation
-
-`ChipNavigationBar` supports a vertical orientation mode. This is very useful for
-tablets or devices with large screens.
-
-<img width="350" align="right" src="https://user-images.githubusercontent.com/7879502/58746359-52568800-8455-11e9-9fa9-4cf49abeb4ee.gif"/>
-
-Just add the attribute `cnb_orientationMode` to your xml:
-```xml
-<com.ismaeldivita.chipnavigation.ChipNavigationBar
-    android:id="@+id/bottom_menu"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    app:cnb_menuResource="@menu/test"
-    app:cnb_orientationMode="vertical" />
-```
-... or programmatically call the method `setMenuOrientation` before inflate the menu:
-```kotlin
-menu.setMenuOrientation(MenuOrientation.VERTICAL)
-menu.setMenuResource(R.menu.my_menu)
-```
-
- >**Note:** The view exposes methods to expand and collapse the menu but we don't provide the implementation for the toggle button. Check the sample for a basic implementation.
-
- <br clear="right"/>
-
 ## Installation
 
-**Required Android Lollipop - API Level 22**
+**Required**
+- AndroidX - See [migration guide](https://developer.android.com/jetpack/androidx/migrate)
+- Android Lollipop - API Level 22
 
 ### Gradle
+
+Make sure that the repositories section includes JCenter
 ```gradle
-implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:0.0.1'
+buildscript {
+    ...
+    repositories {
+        jcenter()
+        ...
+    }
+```
+Add the library to the dependencies:
+
+```gradle
+implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.0.0'
 ```
 
 ## License
