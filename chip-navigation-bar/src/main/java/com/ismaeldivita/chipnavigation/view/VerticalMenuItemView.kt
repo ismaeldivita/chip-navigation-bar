@@ -61,6 +61,14 @@ internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
         container.setCustomRipple(containerBackground, containerForeground)
     }
 
+    override fun showBadge(count: Int) {
+
+    }
+
+    override fun dismissBadge() {
+
+    }
+
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
 

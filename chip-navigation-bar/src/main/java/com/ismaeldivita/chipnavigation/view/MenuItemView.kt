@@ -8,4 +8,8 @@ internal abstract class MenuItemView(context: Context) : FrameLayout(context) {
 
     abstract fun bind(item: MenuItem)
 
+    abstract fun showBadge(count: Int = 0)
+
+    abstract fun dismissBadge()
+
 }
