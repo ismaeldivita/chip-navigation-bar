@@ -176,7 +176,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     }
 
     /**
-     * Display a notification badge without a counter for a menu item
+     * Display a notification numberless badge for a menu item
      *
      * @param id menu item id
      */

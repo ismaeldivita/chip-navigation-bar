@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
+import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -17,7 +18,10 @@ import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
 import com.ismaeldivita.chipnavigation.util.setCustomRipple
 import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 
-internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
+internal class VerticalMenuItemView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : MenuItemView(context, attrs) {
 
     private val title by lazy { findViewById<TextView>(R.id.cbn_item_title) }
     private val icon by lazy { findViewById<ImageView>(R.id.cnb_item_icon) }
