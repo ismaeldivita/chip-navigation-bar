@@ -50,7 +50,7 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
             context.resources.getDimensionPixelSize(R.dimen.cnb_badge_size_numberless)
         }
         val extraPadding = if (count > MAX_BADGE_COUNT) 1.5 else 1.0
-        shapeDrawable.cornerRadius = parentBounds.height().div(2).toFloat()
+        shapeDrawable.cornerRadius = parentBounds.height() * 0.5f
         shapeDrawable.setBounds(
             parentBounds.right - size.times(extraPadding).roundToInt(),
             0,
