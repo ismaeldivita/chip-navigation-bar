@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 
-class BadgeImageView @JvmOverloads constructor(
+internal class BadgeImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
 ) : ImageView(context, attrs) {

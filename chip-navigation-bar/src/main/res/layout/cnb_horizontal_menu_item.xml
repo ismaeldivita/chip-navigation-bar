@@ -17,10 +17,10 @@
         android:padding="@dimen/cnb_space"
         tools:background="#000">
 
-        <ImageView
+        <com.ismaeldivita.chipnavigation.view.BadgeImageView
             android:id="@+id/cnb_item_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/cnb_icon_size"
+            android:layout_height="@dimen/cnb_icon_size"
             android:layout_gravity="center_vertical|start"
             android:duplicateParentState="true"
             tools:src="@android:drawable/btn_star_big_off" />

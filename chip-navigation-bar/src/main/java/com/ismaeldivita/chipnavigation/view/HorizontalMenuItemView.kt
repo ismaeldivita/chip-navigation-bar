@@ -6,7 +6,6 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
@@ -21,7 +20,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 ) : MenuItemView(context, attrs) {
 
     private val title by lazy { findViewById<TextView>(R.id.cbn_item_title) }
-    private val icon by lazy { findViewById<ImageView>(R.id.cnb_item_icon) }
+    private val icon by lazy { findViewById<BadgeImageView>(R.id.cnb_item_icon) }
     private val container by lazy { findViewById<View>(R.id.cbn_item_internal_container) }
 
     init {
@@ -55,11 +54,11 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     }
 
     override fun showBadge(count: Int) {
-
+        icon.showBadge(count)
     }
 
     override fun dismissBadge() {
-
+        icon.dismissBadge()
     }
 
     override fun setEnabled(enabled: Boolean) {
