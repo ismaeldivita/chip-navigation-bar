@@ -17,9 +17,17 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
         private const val MAX_BADGE_COUNT = 99
     }
 
-    private var count: Int = 0
+    var count: Int = 0
+        set(value) {
+            field = value
+            parentBounds?.let(::updateBadgeBounds)
+        }
+
     private var parentBounds: Rect? = null
-    private val shapeDrawable = GradientDrawable().apply { shape = RECTANGLE }
+
+    private val shapeDrawable by lazy {
+        GradientDrawable().apply { shape = RECTANGLE }
+    }
 
     private val textPaint by lazy {
         TextPaint().apply {
@@ -40,9 +48,8 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
         shapeDrawable.setStroke(width, color)
     }
 
-    fun updateBadgeBounds(parentBounds: Rect, count: Int) {
+    fun updateBadgeBounds(parentBounds: Rect) {
         this.parentBounds = parentBounds
-        this.count = count
 
         val size = if (count > 0) {
             context.resources.getDimensionPixelSize(R.dimen.cnb_badge_size)

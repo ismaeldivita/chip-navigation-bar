@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 
@@ -18,19 +19,33 @@ internal class BadgeImageView @JvmOverloads constructor(
     @ColorInt
     var badgeStrokeColor: Int = Color.TRANSPARENT
 
-    private val badge by lazy { BadgeDrawable(context) }
+    private val badge = BadgeDrawable(context)
+
+    init {
+        addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            if (visibility == View.VISIBLE) {
+                badge.updateBadgeBounds(Rect().apply(::getDrawingRect))
+            }
+        }
+    }
 
     fun showBadge(count: Int) {
-        val rect = Rect().also(::getDrawingRect)
+        val bounds = Rect().apply(::getDrawingRect)
 
         badge.setColor(badgeColor)
-        badge.updateBadgeBounds(rect, count)
         badge.setStroke(badgeStrokeColor)
+        badge.count = count
+
+        if (!bounds.isEmpty) {
+            badge.updateBadgeBounds(bounds)
+        }
         overlay.add(badge)
+        invalidate()
     }
 
     fun dismissBadge() {
         overlay.remove(badge)
+        invalidate()
     }
 
 }
