@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.RECTANGLE
 import android.text.TextPaint
-import android.view.View
 import androidx.annotation.ColorInt
 import com.ismaeldivita.chipnavigation.R
 import kotlin.math.roundToInt
@@ -86,11 +85,10 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
 
     private fun drawText(canvas: Canvas) {
         val textBounds = Rect()
-        val isRtl = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
-        val countText = when {
-            count > MAX_BADGE_COUNT && isRtl -> "$MAX_BADGE_COUNT+"
-            count > MAX_BADGE_COUNT -> "+$MAX_BADGE_COUNT"
-            else -> count.toString()
+        val countText = if (count > MAX_BADGE_COUNT) {
+            "$MAX_BADGE_COUNT+"
+        } else {
+            count.toString()
         }
 
         textPaint.getTextBounds(countText, 0, countText.length, textBounds)
