@@ -1,7 +1,6 @@
 package com.ismaeldivita.chipnavigation.view
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
@@ -13,12 +12,6 @@ internal class BadgeImageView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : ImageView(context, attrs) {
 
-    @ColorInt
-    var badgeColor: Int = Color.RED
-
-    @ColorInt
-    var badgeStrokeColor: Int = Color.TRANSPARENT
-
     private val badge = BadgeDrawable(context)
 
     init {
@@ -29,10 +22,13 @@ internal class BadgeImageView @JvmOverloads constructor(
         }
     }
 
+    fun setBadgeColor(@ColorInt color: Int) {
+        badge.setColor(color)
+    }
+
     fun showBadge(count: Int) {
         val bounds = Rect().apply(::getDrawingRect)
 
-        badge.setColor(badgeColor)
         badge.count = count
 
         if (!bounds.isEmpty) {

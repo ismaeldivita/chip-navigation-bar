@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="cnb_default_unselected_color">#696969</color>
-    <color name="cnb_default_badge_tint_color">#00FF00</color>
+    <color name="cnb_default_badge_tint_color">#F44336</color>
     <public/>
 </resources>
