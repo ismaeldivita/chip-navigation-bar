@@ -42,11 +42,6 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
         shapeDrawable.setColor(color)
     }
 
-    fun setStroke(@ColorInt color: Int) {
-        val width = context.resources.getDimensionPixelSize(R.dimen.cnb_badge_stroke_width)
-        shapeDrawable.setStroke(width, color)
-    }
-
     fun updateBadgeBounds(parentBounds: Rect) {
         this.parentBounds = parentBounds
 

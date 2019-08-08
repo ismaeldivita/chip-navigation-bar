@@ -33,7 +33,6 @@ internal class BadgeImageView @JvmOverloads constructor(
         val bounds = Rect().apply(::getDrawingRect)
 
         badge.setColor(badgeColor)
-        badge.setStroke(badgeStrokeColor)
         badge.count = count
 
         if (!bounds.isEmpty) {
