@@ -10,6 +10,7 @@ import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.util.getChildren
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import android.view.View
+import androidx.annotation.IntDef
 import androidx.annotation.IntRange
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
@@ -190,8 +191,8 @@ class ChipNavigationBar @JvmOverloads constructor(
      *
      * @param id menu item id
      */
-    fun showBadge(id: Int, count: Int) {
-        getItemById(id)?.showBadge(count)
+    fun showBadge(id: Int, @IntRange(from = 1) count: Int) {
+        getItemById(id)?.showBadge(maxOf(count, 0))
     }
 
     /**

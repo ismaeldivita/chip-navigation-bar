@@ -16,9 +16,10 @@
         android:gravity="start"
         android:orientation="horizontal"
         android:padding="@dimen/cnb_space"
-        tools:background="#000">
+        tools:background="#000"
+        tools:layout_width="200dp">
 
-        <ImageView
+        <com.ismaeldivita.chipnavigation.view.BadgeImageView
             android:id="@+id/cnb_item_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -36,8 +37,24 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:duplicateParentState="true"
-            android:maxLines="1"
+            android:singleLine="true"
             tools:text="Discover"
+            tools:textColor="#FFF" />
+
+
+        <TextView
+            android:id="@+id/cbn_item_notification_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:duplicateParentState="true"
+            android:ellipsize="middle"
+            android:gravity="end"
+            android:singleLine="true"
+            android:textStyle="bold"
+            tools:text="123456789"
             tools:textColor="#FFF" />
 
     </LinearLayout>
