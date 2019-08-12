@@ -16,7 +16,6 @@ import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
-import java.lang.IllegalArgumentException
 
 class ChipNavigationBar @JvmOverloads constructor(
     context: Context,
@@ -26,12 +25,14 @@ class ChipNavigationBar @JvmOverloads constructor(
     private lateinit var orientationMode: MenuOrientation
     private val behavior: HideOnScrollBehavior
     private var listener: OnItemSelectedListener? = null
+    private var minimumExpandedWidth: Int = 0
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ChipNavigationBar)
 
         val menuResource = a.getResourceId(R.styleable.ChipNavigationBar_cnb_menuResource, -1)
         val hideOnScroll = a.getBoolean(R.styleable.ChipNavigationBar_cnb_hideOnScroll, false)
+        val minExpanded = a.getDimension(R.styleable.ChipNavigationBar_cnb_minExpandedWidth, 0F)
         val leftInset = a.getBoolean(R.styleable.ChipNavigationBar_cnb_addLeftInset, false)
         val topInset = a.getBoolean(R.styleable.ChipNavigationBar_cnb_addTopInset, false)
         val rightInset = a.getBoolean(R.styleable.ChipNavigationBar_cnb_addRightInset, false)
@@ -39,7 +40,7 @@ class ChipNavigationBar @JvmOverloads constructor(
         val orientation = when (a.getInt(R.styleable.ChipNavigationBar_cnb_orientationMode, 0)) {
             0 -> MenuOrientation.HORIZONTAL
             1 -> MenuOrientation.VERTICAL
-            else -> throw IllegalArgumentException()
+            else -> MenuOrientation.HORIZONTAL
         }
 
         a.recycle()
@@ -51,8 +52,10 @@ class ChipNavigationBar @JvmOverloads constructor(
             setMenuResource(menuResource)
         }
 
+        setMinimumExpandedWidth(minExpanded.toInt())
         setHideOnScroll(hideOnScroll)
         applyWindowInsets(leftInset, topInset, rightInset, bottomInset)
+        collapse()
 
         isClickable = true
     }
@@ -130,6 +133,15 @@ class ChipNavigationBar @JvmOverloads constructor(
      */
     fun setHideOnScroll(isEnabled: Boolean) {
         behavior.scrollEnabled = isEnabled && orientationMode == MenuOrientation.HORIZONTAL
+    }
+
+    /**
+     * Set the minimum width for the vertical expanded state.
+     *
+     * @param minExpandedWidth width in pixels
+     */
+    fun setMinimumExpandedWidth(minExpandedWidth: Int) {
+        minimumExpandedWidth = minExpandedWidth
     }
 
     /**
@@ -228,6 +240,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     fun collapse() {
         if (orientationMode == MenuOrientation.VERTICAL) {
             forEachChild {
+                it.minimumWidth = 0
                 (it as? VerticalMenuItemView)?.collapse()
             }
         }
@@ -239,6 +252,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     fun expand() {
         if (orientationMode == MenuOrientation.VERTICAL) {
             forEachChild {
+                it.minimumWidth = minimumExpandedWidth
                 (it as? VerticalMenuItemView)?.expand()
             }
         }

@@ -69,14 +69,14 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         containerBackground.setTint(item.backgroundColor)
         containerForeground.setTint(Color.BLACK)
 
-        styleContainerForExpandedState()
+        styleContainerForCollapseState()
 
         container.setCustomRipple(containerBackground, containerForeground)
     }
 
     override fun showBadge(count: Int) {
         badgeCount = count
-        countLabel.text = badgeCount.takeIf { it > 0 }?.toString() ?: Typography.bullet.toString()
+        countLabel.text = badgeCount.takeIf { it > 0 }?.toString() ?: "!"
         if (!isExpanded()) {
             icon.showBadge(badgeCount)
         }
