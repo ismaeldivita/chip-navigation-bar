@@ -22,6 +22,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:elevation="16dp"
+            app:cnb_minExpandedWidth="200dp"
             app:cnb_addTopInset="true"
             app:cnb_menuResource="@menu/test"
             app:cnb_orientationMode="vertical" />
