@@ -20,7 +20,7 @@ class VerticalModeActivity : AppCompatActivity() {
     private val menu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
 
     private var lastColor: Int = 0
-    private var isExpanded = true
+    private var isExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
