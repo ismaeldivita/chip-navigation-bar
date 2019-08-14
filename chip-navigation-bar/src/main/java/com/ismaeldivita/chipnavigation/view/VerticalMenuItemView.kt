@@ -119,7 +119,8 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         title.visibility = View.GONE
         countLabel.visibility = View.GONE
         containerForeground.cornerRadius = 1000f
-        container.updateLayoutParams<LayoutParams> { marginStart = doubleSpace }
+        container.updateLayoutParams<MarginLayoutParams> { marginStart = doubleSpace }
+        icon.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
 
         if (isSelected) {
             containerBackground.cornerAnimation(0f, 1000f)
@@ -135,7 +136,9 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         val cornerRadii = floatArrayOf(0f, 0f, 1000f, 1000f, 1000f, 1000f, 0f, 0f)
         title.visibility = View.VISIBLE
         countLabel.visibility = View.VISIBLE
-        container.updateLayoutParams<LayoutParams> { marginStart = 0 }
+        container.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
+        icon.updateLayoutParams<MarginLayoutParams> { marginStart = doubleSpace }
+
         containerForeground.cornerRadii = cornerRadii
 
         if (isSelected) {
