@@ -5,10 +5,10 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
+import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.ImageView
 import android.widget.TextView
 import com.ismaeldivita.chipnavigation.R
 import com.ismaeldivita.chipnavigation.model.MenuItem
@@ -17,14 +17,20 @@ import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
 import com.ismaeldivita.chipnavigation.util.setCustomRipple
 import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 
-internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
+internal class VerticalMenuItemView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : MenuItemView(context, attrs) {
 
     private val title by lazy { findViewById<TextView>(R.id.cbn_item_title) }
-    private val icon by lazy { findViewById<ImageView>(R.id.cnb_item_icon) }
+    private val icon by lazy { findViewById<BadgeImageView>(R.id.cnb_item_icon) }
+    private val countLabel by lazy { findViewById<TextView>(R.id.cbn_item_notification_count) }
     private val container by lazy { findViewById<View>(R.id.cbn_item_internal_container) }
     private val containerBackground = GradientDrawable()
     private val containerForeground = GradientDrawable()
     private val doubleSpace = resources.getDimension(R.dimen.cnb_double_space).toInt()
+
+    private var badgeCount = -1
 
     private companion object {
         private const val BACKGROUND_CORNER_ANIMATION_DURATION: Long = 250
@@ -46,6 +52,13 @@ internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
             disabledColor = item.disabledColor
         )
 
+        countLabel.setColorStateListAnimator(
+            color = item.textColor,
+            unselectedColor = item.unselectedColor,
+            disabledColor = item.disabledColor
+        )
+
+        icon.setBadgeColor(item.badgeColor)
         icon.setImageResource(item.icon)
         icon.setColorStateListAnimator(
             color = item.iconColor,
@@ -56,9 +69,23 @@ internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
         containerBackground.setTint(item.backgroundColor)
         containerForeground.setTint(Color.BLACK)
 
-        styleContainerForExpandedState()
+        styleContainerForCollapseState()
 
         container.setCustomRipple(containerBackground, containerForeground)
+    }
+
+    override fun showBadge(count: Int) {
+        badgeCount = count
+        countLabel.text = badgeCount.takeIf { it > 0 }?.toString() ?: "!"
+        if (!isExpanded()) {
+            icon.showBadge(badgeCount)
+        }
+    }
+
+    override fun dismissBadge() {
+        badgeCount = -1
+        icon.dismissBadge()
+        countLabel.text = ""
     }
 
     override fun setEnabled(enabled: Boolean) {
@@ -74,14 +101,23 @@ internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
 
     fun expand() {
         styleContainerForExpandedState()
+        if (badgeCount >= 0) {
+            icon.dismissBadge()
+        }
     }
 
     fun collapse() {
         styleContainerForCollapseState()
+        if (badgeCount >= 0) {
+            icon.showBadge(badgeCount)
+        }
     }
+
+    private fun isExpanded(): Boolean = title.visibility == View.VISIBLE
 
     private fun styleContainerForCollapseState() {
         title.visibility = View.GONE
+        countLabel.visibility = View.GONE
         containerForeground.cornerRadius = 1000f
         container.updateLayoutParams<LayoutParams> { marginStart = doubleSpace }
 
@@ -98,6 +134,7 @@ internal class VerticalMenuItemView(context: Context) : MenuItemView(context) {
     private fun styleContainerForExpandedState() {
         val cornerRadii = floatArrayOf(0f, 0f, 1000f, 1000f, 1000f, 1000f, 0f, 0f)
         title.visibility = View.VISIBLE
+        countLabel.visibility = View.VISIBLE
         container.updateLayoutParams<LayoutParams> { marginStart = 0 }
         containerForeground.cornerRadii = cornerRadii
 

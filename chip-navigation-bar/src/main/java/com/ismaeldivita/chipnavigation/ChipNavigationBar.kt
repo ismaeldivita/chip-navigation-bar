@@ -10,6 +10,8 @@ import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.util.getChildren
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import android.view.View
+import androidx.annotation.IntDef
+import androidx.annotation.IntRange
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.view.MenuItemView
@@ -187,6 +189,34 @@ class ChipNavigationBar @JvmOverloads constructor(
     }
 
     /**
+     * Display a notification numberless badge for a menu item
+     *
+     * @param id menu item id
+     */
+    fun showBadge(id: Int) {
+        getItemById(id)?.showBadge()
+    }
+
+    /**
+     * Display a notification badge with a counter for a menu item
+     * The maximum digits length to be displayed is 2 otherwise "+99" will be displayed
+     *
+     * @param id menu item id
+     */
+    fun showBadge(id: Int, @IntRange(from = 1) count: Int) {
+        getItemById(id)?.showBadge(maxOf(count, 0))
+    }
+
+    /**
+     * Dismiss the displayed badge for a menu item
+     *
+     * @param id menu item id
+     */
+    fun dismissBadge(id: Int) {
+        getItemById(id)?.dismissBadge()
+    }
+
+    /**
      * Show menu if the orientationMode is HORIZONTAL otherwise, do nothing
      */
     fun show() {
@@ -248,7 +278,9 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param id menu item id
      * @return the menu item view or null if the id was not found
      */
-    private fun getItemById(id: Int) = getChildren().firstOrNull { it.id == id }
+    private fun getItemById(id: Int) = getChildren()
+        .filterIsInstance<MenuItemView>()
+        .firstOrNull { it.id == id }
 
     /**
      * Create a menu item view based on the menu orientationMode
