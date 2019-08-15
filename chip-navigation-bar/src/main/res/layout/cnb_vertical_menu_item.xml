@@ -15,7 +15,7 @@
         android:duplicateParentState="true"
         android:gravity="start"
         android:orientation="horizontal"
-        android:padding="@dimen/cnb_space"
+        android:padding="@dimen/cnb_double_space"
         tools:background="#000"
         tools:layout_width="200dp">
 
@@ -24,6 +24,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/cnb_double_space"
             android:duplicateParentState="true"
             tools:src="@android:drawable/btn_star_big_off"
             tools:visibility="visible" />
@@ -37,6 +38,7 @@
             android:layout_marginStart="@dimen/cnb_double_space"
             android:layout_marginEnd="@dimen/cnb_space"
             android:duplicateParentState="true"
+            android:textStyle="bold"
             android:singleLine="true"
             tools:text="Discover"
             tools:textColor="#FFF" />

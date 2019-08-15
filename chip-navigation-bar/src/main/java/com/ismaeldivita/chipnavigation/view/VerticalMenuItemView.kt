@@ -120,7 +120,10 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         countLabel.visibility = View.GONE
         containerForeground.cornerRadius = 1000f
         container.updateLayoutParams<MarginLayoutParams> { marginStart = doubleSpace }
-        icon.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
+        icon.updateLayoutParams<MarginLayoutParams> {
+            marginStart = 0
+            marginEnd = 0
+        }
 
         if (isSelected) {
             containerBackground.cornerAnimation(0f, 1000f)
@@ -137,7 +140,10 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         title.visibility = View.VISIBLE
         countLabel.visibility = View.VISIBLE
         container.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
-        icon.updateLayoutParams<MarginLayoutParams> { marginStart = doubleSpace }
+        icon.updateLayoutParams<MarginLayoutParams> {
+            marginStart = doubleSpace
+            marginEnd = doubleSpace
+        }
 
         containerForeground.cornerRadii = cornerRadii
 
