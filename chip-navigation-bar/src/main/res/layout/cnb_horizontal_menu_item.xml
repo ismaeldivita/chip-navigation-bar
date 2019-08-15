@@ -12,9 +12,9 @@
         android:layout_gravity="center"
         android:duplicateParentState="true"
         android:gravity="start"
-        android:layout_margin="@dimen/cnb_double_space"
+        android:layout_margin="@dimen/cnb_space"
         android:orientation="horizontal"
-        android:padding="@dimen/cnb_space"
+        android:padding="@dimen/cnb_medium_space"
         tools:background="#000">
 
         <com.ismaeldivita.chipnavigation.view.BadgeImageView

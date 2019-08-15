@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cnb_space">6dp</dimen>
+    <dimen name="cnb_medium_space">8dp</dimen>
     <dimen name="cnb_double_space">12dp</dimen>
     <dimen name="cnb_icon_size">24dp</dimen>
 
-    <dimen name="cnb_badge_size">13dp</dimen> <!-- 12 + cnb_badge_stroke_width -->
+    <dimen name="cnb_badge_size">12dp</dimen>
     <dimen name="cnb_badge_size_numberless">6dp</dimen>
     <dimen name="cnb_badge_text_size">8dp</dimen>
     <dimen name="cnb_badge_stroke_width">1dp</dimen>
