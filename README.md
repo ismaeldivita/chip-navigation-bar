@@ -190,7 +190,7 @@ buildscript {
 Add the library to the dependencies:
 
 ```gradle
-implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.0.0'
+implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.1.0'
 ```
  >**Note:** For projects without kotlin, you may need to add `org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion` to your dependencies since this is a Kotlin library.
 
