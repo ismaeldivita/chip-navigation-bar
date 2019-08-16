@@ -3,6 +3,7 @@ package com.ismaeldivita.chipnavigation.view
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
@@ -29,16 +30,18 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     private val containerBackground = GradientDrawable()
     private val containerForeground = GradientDrawable()
     private val doubleSpace = resources.getDimension(R.dimen.cnb_double_space).toInt()
-
+    private val originalTypeFace: Typeface
     private var badgeCount = -1
 
     private companion object {
         private const val BACKGROUND_CORNER_ANIMATION_DURATION: Long = 250
+        private const val BULLET =  '\u2B24'
     }
 
     init {
         View.inflate(getContext(), R.layout.cnb_vertical_menu_item, this)
         layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        originalTypeFace = countLabel.typeface
     }
 
     override fun bind(item: MenuItem) {
@@ -76,7 +79,14 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
 
     override fun showBadge(count: Int) {
         badgeCount = count
-        countLabel.text = badgeCount.takeIf { it > 0 }?.toString() ?: "!"
+        if (badgeCount > 0) {
+            countLabel.typeface = originalTypeFace
+            countLabel.text = badgeCount.toString()
+        } else {
+            countLabel.typeface = Typeface.DEFAULT
+            countLabel.text = BULLET.toString()
+        }
+
         if (!isExpanded()) {
             icon.showBadge(badgeCount)
         }
