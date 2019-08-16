@@ -20,6 +20,7 @@ class VerticalMenuTest {
     fun testSelection() {
         menu(rule) {
             loadMenuResource(R.menu.test_menu, VERTICAL)
+            expand()
 
             noItemSelected(R.id.home, R.id.discover, R.id.search, R.id.settings)
 
@@ -57,6 +58,7 @@ class VerticalMenuTest {
     fun testSelectionWithDisabledItems() {
         menu(rule) {
             loadMenuResource(R.menu.test_menu_disabled, VERTICAL)
+            expand()
 
             item(R.id.home) {
                 isSelected(false)
@@ -90,6 +92,7 @@ class VerticalMenuTest {
     fun testDisableAnActiveItem() {
         menu(rule) {
             loadMenuResource(R.menu.test_menu, VERTICAL)
+            expand()
 
             item(R.id.home) {
                 isSelected(false)
@@ -108,6 +111,7 @@ class VerticalMenuTest {
     fun testHideOnScrollIsDisable() {
         menu(rule) {
             loadMenuResource(R.menu.test_menu, VERTICAL)
+            expand()
             isDisplayed()
             swipeUp()
             isDisplayed()
@@ -121,6 +125,7 @@ class VerticalMenuTest {
     fun testCollapseBehavior() {
         menu(rule) {
             loadMenuResource(R.menu.test_menu, VERTICAL)
+            expand()
             item(R.id.home) { isTitleDisplayed(true) }
             collapse()
             item(R.id.home) { isTitleDisplayed(false) }

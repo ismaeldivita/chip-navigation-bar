@@ -74,9 +74,9 @@ The library supports badges on the menu items.
 
 ```kotlin
 menu.showBadge(R.id.menu_home) 
-menu.showBadge(R.id.menu_home, 8)
-menu.showBadge(R.id.menu_home, 88)
-menu.showBadge(R.id.menu_home, 10000)
+menu.showBadge(R.id.menu_activity, 8)
+menu.showBadge(R.id.menu_favorites, 88)
+menu.showBadge(R.id.settings, 10000)
 ```
 
 ## XML custom attributes
