@@ -122,7 +122,7 @@ internal class MenuParser(private val context: Context) {
 
     private fun readBadgeColor(sAttr: TypedArray): Int = sAttr.getColor(
         R.styleable.ChipMenu_cnb_badgeColor,
-        ContextCompat.getColor(context, R.color.cnb_default_badge_tint_color)
+        ContextCompat.getColor(context, R.color.cnb_default_badge_color)
     )
 
     private fun readDisabledColor(sAttr: TypedArray): Int = sAttr.getColor(

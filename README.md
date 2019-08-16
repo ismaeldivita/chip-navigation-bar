@@ -3,7 +3,7 @@
 A navigation bar widget inspired on Google [Bottom Navigation](https://material.io/design/components/bottom-navigation.html) mixed with [Chips](https://material.io/design/components/chips.html) component.
 
 ## Usage
-<img align="right" width="350" src="https://user-images.githubusercontent.com/7879502/58746357-4f5b9780-8455-11e9-8efd-62f064ce0a34.gif">
+<img align="right" width="350" src="./art/h.gif">
 
 ```xml
 <!-- bottom_menu.xml -->
@@ -46,7 +46,7 @@ A navigation bar widget inspired on Google [Bottom Navigation](https://material.
 `ChipNavigationBar` supports a vertical orientation mode. This is very useful for
 tablets or devices with large screens.
 
-<img width="350" align="right" src="https://user-images.githubusercontent.com/7879502/58746359-52568800-8455-11e9-9fa9-4cf49abeb4ee.gif"/>
+<img width="350" align="right" src="./art/v.gif"/>
 
 Just add the attribute `cnb_orientationMode` to your xml:
 ```xml
@@ -67,6 +67,18 @@ menu.setMenuResource(R.menu.my_menu)
 
  <br clear="right"/>
 
+## Badges
+The library supports badges on the menu items.
+
+<img width="350" align="right"  src="./art/badge.png"/>
+
+```kotlin
+menu.showBadge(R.id.menu_home) 
+menu.showBadge(R.id.menu_home, 8)
+menu.showBadge(R.id.menu_home, 88)
+menu.showBadge(R.id.menu_home, 10000)
+```
+
 ## XML custom attributes
 ### Menu xml custom attributes
 
@@ -74,13 +86,14 @@ menu.setMenuResource(R.menu.my_menu)
 |----------|-------------|------|
 | `cnb_disabledColor` |color used for the disable state|`R.attr.colorButtonNormal`|
 | `cnb_unselectedColor` |color used for unselected state|`#696969`|
+| `cnb_badgeColor` |color used for the badge|`#F44336`|
 
 ```xml
 <menu
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cnb_disabledColor="#606060"
-    app:cnb_unselectedColor="@color/my_unselected_color">
-
+    app:cnb_unselectedColor="@color/my_unselected_color"
+    app:cnb_badgeColor="@color/my_badge_color">
     ...
 
 </menu>
@@ -126,7 +139,7 @@ menu.setMenuResource(R.menu.my_menu)
 | `cnb_addTopInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent status bar with the vertical mode|false|
 | `cnb_addLeftInset`|property to enable the sum of the window insets on the current start padding, useful when you're using the translucent navigation bar with landscape|false|
 | `cnb_addRightInset`|property to enable the sum of the window insets on the current end padding, useful when you're using the translucent navigation bar with landscape|false|
-
+| `cnb_minExpandedWidth`|minimum width for vertical menu when expanded|0
 ```xml
 <com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:id="@+id/menu"
@@ -138,7 +151,8 @@ menu.setMenuResource(R.menu.my_menu)
     app:cnb_addBottomInset="false"
     app:cnb_addLeftInset="false"
     app:cnb_addRightInset="false"
-    app:cnb_addTopInset="false" />
+    app:cnb_addTopInset="false"
+    app:cnb_minExpandedWidth="150dp" />
 ```
 ## Public API
 
@@ -154,7 +168,8 @@ menu.setMenuResource(R.menu.my_menu)
 |`hide()`|Hide menu if the orientationMode is HORIZONTAL otherwise, do nothing|
 |`collapse()`|Collapse the menu items if orientationMode is VERTICAL otherwise, do nothing|
 |`expand()`|Expand the menu items if orientationMode is VERTICAL otherwise, do nothing|
-
+|`showBadge(id: Int)`|Display a numberless badge for the menu item with the [id]|
+|`showBadge(id: Int, count: Int)`|Display a countable badge with for the menu item with the [id]|
 ## Installation
 
 **Required**
