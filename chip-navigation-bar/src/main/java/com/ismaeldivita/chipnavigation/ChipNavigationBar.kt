@@ -2,18 +2,18 @@ package com.ismaeldivita.chipnavigation
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.ismaeldivita.chipnavigation.behavior.HideOnScrollBehavior
+import com.ismaeldivita.chipnavigation.model.Menu
 import com.ismaeldivita.chipnavigation.model.MenuParser
-import com.ismaeldivita.chipnavigation.util.getChildren
-import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
-import android.view.View
-import androidx.annotation.IntDef
-import androidx.annotation.IntRange
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
+import com.ismaeldivita.chipnavigation.util.getChildren
+import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
 
@@ -26,6 +26,8 @@ class ChipNavigationBar @JvmOverloads constructor(
     private val behavior: HideOnScrollBehavior
     private var listener: OnItemSelectedListener? = null
     private var minimumExpandedWidth: Int = 0
+
+    var menu: Menu? = null
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ChipNavigationBar)
@@ -66,7 +68,7 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param menuRes Resource ID for an XML layout resource to load
      */
     fun setMenuResource(@MenuRes menuRes: Int) {
-        val menu = (MenuParser(context).parse(menuRes))
+        menu = (MenuParser(context).parse(menuRes))
         val childListener: (View) -> Unit = { view ->
             val id = view.id
             setItemSelected(id)
@@ -75,7 +77,7 @@ class ChipNavigationBar @JvmOverloads constructor(
 
         removeAllViews()
 
-        menu.items.forEach {
+        menu?.items?.forEach {
             val itemView = createMenuItem().apply {
                 bind(it)
                 setOnClickListener(childListener)

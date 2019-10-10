@@ -4,7 +4,7 @@ import android.graphics.PorterDuff
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 
-internal data class MenuItem(
+data class MenuItem(
     val id: Int,
     val title: CharSequence,
     @DrawableRes val icon: Int,
