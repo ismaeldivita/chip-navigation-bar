@@ -5,12 +5,10 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.annotation.MenuRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.ismaeldivita.chipnavigation.behavior.HideOnScrollBehavior
 import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.util.getChildren
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import android.view.View
-import androidx.annotation.IntDef
 import androidx.annotation.IntRange
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
@@ -20,10 +18,9 @@ import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
 class ChipNavigationBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
-) : LinearLayout(context, attrs), CoordinatorLayout.AttachedBehavior {
+) : LinearLayout(context, attrs) {
 
     private lateinit var orientationMode: MenuOrientation
-    private val behavior: HideOnScrollBehavior
     private var listener: OnItemSelectedListener? = null
     private var minimumExpandedWidth: Int = 0
 
@@ -31,7 +28,6 @@ class ChipNavigationBar @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(attrs, R.styleable.ChipNavigationBar)
 
         val menuResource = a.getResourceId(R.styleable.ChipNavigationBar_cnb_menuResource, -1)
-        val hideOnScroll = a.getBoolean(R.styleable.ChipNavigationBar_cnb_hideOnScroll, false)
         val minExpanded = a.getDimension(R.styleable.ChipNavigationBar_cnb_minExpandedWidth, 0F)
         val leftInset = a.getBoolean(R.styleable.ChipNavigationBar_cnb_addLeftInset, false)
         val topInset = a.getBoolean(R.styleable.ChipNavigationBar_cnb_addTopInset, false)
@@ -45,7 +41,6 @@ class ChipNavigationBar @JvmOverloads constructor(
 
         a.recycle()
 
-        behavior = HideOnScrollBehavior(context, attrs)
         setMenuOrientation(orientation)
 
         if (menuResource >= 0) {
@@ -53,7 +48,6 @@ class ChipNavigationBar @JvmOverloads constructor(
         }
 
         setMinimumExpandedWidth(minExpanded.toInt())
-        setHideOnScroll(hideOnScroll)
         applyWindowInsets(leftInset, topInset, rightInset, bottomInset)
         collapse()
 
@@ -95,7 +89,6 @@ class ChipNavigationBar @JvmOverloads constructor(
             MenuOrientation.HORIZONTAL -> HORIZONTAL
             MenuOrientation.VERTICAL -> VERTICAL
         }
-        setHideOnScroll(behavior.scrollEnabled)
     }
 
     /**
@@ -126,44 +119,12 @@ class ChipNavigationBar @JvmOverloads constructor(
     }
 
     /**
-     * Set the enabled state for the hide on scroll [CoordinatorLayout.Behavior].
-     * The behavior is only active when orientation mode is HORIZONTAL
-     *
-     * @param isEnabled True if this view is enabled, false otherwise
-     */
-    fun setHideOnScroll(isEnabled: Boolean) {
-        behavior.scrollEnabled = isEnabled && orientationMode == MenuOrientation.HORIZONTAL
-    }
-
-    /**
      * Set the minimum width for the vertical expanded state.
      *
      * @param minExpandedWidth width in pixels
      */
     fun setMinimumExpandedWidth(minExpandedWidth: Int) {
         minimumExpandedWidth = minExpandedWidth
-    }
-
-    /**
-     * Set the duration of the enter animation for the hide on scroll [CoordinatorLayout.Behavior]
-     * Default value [HideOnScrollBehavior.DEFAULT_ENTER_DURATION]
-     * The behavior is only active when orientation orientationMode is HORIZONTAL
-     *
-     * @param duration animation duration in milliseconds
-     */
-    fun setEnterAnimationDuration(duration: Long) {
-        behavior.enterAnimationDuration = duration
-    }
-
-    /**
-     * Set the duration of the exit animation for the hide on scroll [CoordinatorLayout.Behavior]
-     * Default value [HideOnScrollBehavior.DEFAULT_EXIT_DURATION]
-     * The behavior is only active when orientation is HORIZONTAL
-     *
-     * @param duration animation duration in milliseconds
-     */
-    fun setExitAnimationDuration(duration: Long) {
-        behavior.exitAnimationDuration = duration
     }
 
     /**
@@ -214,24 +175,6 @@ class ChipNavigationBar @JvmOverloads constructor(
      */
     fun dismissBadge(id: Int) {
         getItemById(id)?.dismissBadge()
-    }
-
-    /**
-     * Show menu if the orientationMode is HORIZONTAL otherwise, do nothing
-     */
-    fun show() {
-        if (orientationMode == MenuOrientation.HORIZONTAL) {
-            behavior.slideUp(this)
-        }
-    }
-
-    /**
-     * Hide menu if the orientationMode is HORIZONTAL otherwise, do nothing
-     */
-    fun hide() {
-        if (orientationMode == MenuOrientation.HORIZONTAL) {
-            behavior.slideDown(this)
-        }
     }
 
     /**
@@ -291,8 +234,6 @@ class ChipNavigationBar @JvmOverloads constructor(
         MenuOrientation.HORIZONTAL -> HorizontalMenuItemView(context)
         MenuOrientation.VERTICAL -> VerticalMenuItemView(context)
     }
-
-    override fun getBehavior(): CoordinatorLayout.Behavior<*> = behavior
 
     /**
      * Interface definition for a callback to be invoked when a menu item is selected

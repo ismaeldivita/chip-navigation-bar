@@ -133,7 +133,6 @@ menu.showBadge(R.id.settings, 10000)
 | attribute|description|default|
 |----------|-------------|------ |
 | `cnb_menuResource`|menu resource file|optional since you can set this programmatically|
-| `cnb_hideOnScroll`|flag to enable the reveal and dismiss behavior on user scrolls. Only effective if the view is inside a `CoordinatorLayout`|false|
 | `cnb_orientationMode`|menu orientation. Posisble values: [horizontal, vertical]|horizontal|
 | `cnb_addBottomInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent navigation bar|false|
 | `cnb_addTopInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent status bar with the vertical mode|false|
@@ -146,7 +145,6 @@ menu.showBadge(R.id.settings, 10000)
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cnb_menuResource="@menu/bottom_menu"
-    app:cnb_hideOnScroll="true"
     app:cnb_orientationMode="horizontal"
     app:cnb_addBottomInset="false"
     app:cnb_addLeftInset="false"
@@ -162,10 +160,7 @@ menu.showBadge(R.id.settings, 10000)
 |`setMenuOrientation(menuOrientation: MenuOrientation)` | Set the menu orientation|
 |`setItemEnabled(id: Int, isEnabled: Boolean)` | Set the enabled state for the menu item with the provided [id]|
 |`setItemSelected(id: Int)` | Remove the selected state from the current item and set the selected state to true for the menu item with the [id]|
-|`setHideOnScroll(isEnabled: Boolean)`|Set the enabled state for the hide on scroll [CoordinatorLayout.Behavior]. The behavior is only active when orientation mode is HORIZONTAL|
 |`setOnItemSelectedListener(listener: OnItemSelectedListener)`|Register a callback to be invoked when a menu item is selected|
-|`show()`|Show menu if the orientationMode is HORIZONTAL otherwise, do nothing|
-|`hide()`|Hide menu if the orientationMode is HORIZONTAL otherwise, do nothing|
 |`collapse()`|Collapse the menu items if orientationMode is VERTICAL otherwise, do nothing|
 |`expand()`|Expand the menu items if orientationMode is VERTICAL otherwise, do nothing|
 |`showBadge(id: Int)`|Display a numberless badge for the menu item with the [id]|

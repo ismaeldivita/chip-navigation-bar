@@ -104,16 +104,4 @@ class HorizontalMenuTest {
         }
     }
 
-    @Test
-    fun testHideOnScroll() {
-        menu(rule) {
-            loadMenuResource(R.menu.test_menu, HORIZONTAL)
-            isDisplayed()
-            swipeUp()
-            isHidden()
-            swipeDown()
-            isDisplayed()
-        }
-    }
-
 }

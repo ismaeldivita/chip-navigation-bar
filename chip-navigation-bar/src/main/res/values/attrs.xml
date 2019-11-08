@@ -3,7 +3,6 @@
 
     <declare-styleable name="ChipNavigationBar">
         <attr name="cnb_menuResource" format="reference" />
-        <attr name="cnb_hideOnScroll" format="boolean" />
         <attr name="cnb_minExpandedWidth" format="dimension" />
         <attr name="cnb_addBottomInset" format="boolean" />
         <attr name="cnb_addTopInset" format="boolean" />

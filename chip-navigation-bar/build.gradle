@@ -41,7 +41,7 @@ ext {
     siteUrl = 'https://github.com/ismaeldivita/chip-navigation-bar'
     gitUrl = 'https://github.com/ismaeldivita/chip-navigation-bar.git'
 
-    libraryVersion = '1.1.0'
+    libraryVersion = '1.1.1'
 
     developerId = 'ismaeldivita'
     developerName = 'Ismael Di Vita'
