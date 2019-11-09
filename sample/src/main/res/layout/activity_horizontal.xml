@@ -25,6 +25,8 @@
         android:background="@color/white"
         android:elevation="16dp"
         app:cnb_addBottomInset="true"
+        app:cnb_addLeftInset="true"
+        app:cnb_addRightInset="true"
         app:cnb_menuResource="@menu/test"
         app:cnb_orientationMode="horizontal" />
 

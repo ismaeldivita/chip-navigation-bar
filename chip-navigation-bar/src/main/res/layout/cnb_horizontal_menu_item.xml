@@ -38,7 +38,7 @@
             android:visibility="gone"
             tools:text="Discover"
             tools:textColor="#FFF"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
     </LinearLayout>
 

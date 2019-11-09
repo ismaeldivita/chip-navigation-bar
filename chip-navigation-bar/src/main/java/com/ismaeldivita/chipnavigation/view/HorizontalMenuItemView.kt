@@ -1,19 +1,22 @@
 package com.ismaeldivita.chipnavigation.view
 
 import android.content.Context
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import com.ismaeldivita.chipnavigation.R
 import com.ismaeldivita.chipnavigation.model.MenuItem
-import com.ismaeldivita.chipnavigation.util.*
+import com.ismaeldivita.chipnavigation.util.beginDelayedTransitionOnParent
 import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
+import com.ismaeldivita.chipnavigation.util.setCustomRipple
+import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 
 internal class HorizontalMenuItemView @JvmOverloads constructor(
     context: Context,
@@ -27,6 +30,10 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     init {
         View.inflate(getContext(), R.layout.cnb_horizontal_menu_item, this)
         layoutParams = LayoutParams(0, WRAP_CONTENT, 1F)
+
+        if (context.resources.configuration.orientation == ORIENTATION_LANDSCAPE) {
+            title.visibility = View.VISIBLE
+        }
     }
 
     override fun bind(item: MenuItem) {
@@ -35,6 +42,11 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 
         title.text = item.title
         title.setTextColor(item.textColor)
+        title.setColorStateListAnimator(
+            color = item.iconColor,
+            unselectedColor = item.unselectedColor,
+            disabledColor = item.disabledColor
+        )
 
         icon.setImageResource(item.icon)
         icon.setBadgeColor(item.badgeColor)
@@ -77,20 +89,22 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
 
-        if (selected) {
-            beginDelayedTransitionOnParent()
-            updateLayoutParams<LinearLayout.LayoutParams> {
-                width = WRAP_CONTENT
-                weight = 0F
-            }
-            title.visibility = View.VISIBLE
+        if (context.resources.configuration.orientation == ORIENTATION_PORTRAIT) {
+            if (selected) {
+                beginDelayedTransitionOnParent()
+                updateLayoutParams<LinearLayout.LayoutParams> {
+                    width = WRAP_CONTENT
+                    weight = 0F
+                }
+                title.visibility = View.VISIBLE
 
-        } else {
-            updateLayoutParams<LinearLayout.LayoutParams> {
-                width = 0
-                weight = 1F
+            } else {
+                updateLayoutParams<LinearLayout.LayoutParams> {
+                    width = 0
+                    weight = 1F
+                }
+                title.visibility = View.GONE
             }
-            title.visibility = View.GONE
         }
     }
 

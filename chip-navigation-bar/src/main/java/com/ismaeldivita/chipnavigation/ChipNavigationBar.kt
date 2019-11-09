@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.annotation.MenuRes
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.util.getChildren
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
