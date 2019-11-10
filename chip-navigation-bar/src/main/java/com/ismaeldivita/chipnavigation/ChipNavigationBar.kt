@@ -1,16 +1,18 @@
 package com.ismaeldivita.chipnavigation
 
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
 import com.ismaeldivita.chipnavigation.model.MenuParser
-import com.ismaeldivita.chipnavigation.util.getChildren
-import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
-import android.view.View
-import androidx.annotation.IntRange
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
+import com.ismaeldivita.chipnavigation.util.getChildren
+import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
 
@@ -22,6 +24,11 @@ class ChipNavigationBar @JvmOverloads constructor(
     private lateinit var orientationMode: MenuOrientation
     private var listener: OnItemSelectedListener? = null
     private var minimumExpandedWidth: Int = 0
+
+    @MenuRes
+    private var menuRes = -1
+
+    private val badgesState = mutableMapOf<Int, Int>()
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ChipNavigationBar)
@@ -59,6 +66,8 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param menuRes Resource ID for an XML layout resource to load
      */
     fun setMenuResource(@MenuRes menuRes: Int) {
+        this.menuRes = menuRes
+
         val menu = (MenuParser(context).parse(menuRes))
         val childListener: (View) -> Unit = { view ->
             val id = view.id
@@ -154,6 +163,7 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param id menu item id
      */
     fun showBadge(id: Int) {
+        badgesState[id] = 0
         getItemById(id)?.showBadge()
     }
 
@@ -164,7 +174,8 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param id menu item id
      */
     fun showBadge(id: Int, @IntRange(from = 1) count: Int) {
-        getItemById(id)?.showBadge(maxOf(count, 0))
+        badgesState[id] = count
+        getItemById(id)?.showBadge(count)
     }
 
     /**
@@ -232,6 +243,36 @@ class ChipNavigationBar @JvmOverloads constructor(
     private fun createMenuItem(): MenuItemView = when (orientationMode) {
         MenuOrientation.HORIZONTAL -> HorizontalMenuItemView(context)
         MenuOrientation.VERTICAL -> VerticalMenuItemView(context)
+    }
+
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState()
+        return State(superState, Bundle()).apply {
+            menuId = menuRes
+            selectedItem = getSelectedItemId()
+            badges = badgesState
+        }
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        when (state) {
+            is State -> {
+                super.onRestoreInstanceState(state.superState)
+
+                if (state.menuId != -1) setMenuResource(state.menuId)
+                if (state.selectedItem != -1) setItemSelected(state.selectedItem)
+
+                state.badges.forEach { (itemId, count) ->
+                    if (count > 0) {
+                        showBadge(itemId, count)
+                    } else {
+                        showBadge(itemId)
+                    }
+                }
+            }
+            else -> super.onRestoreInstanceState(state)
+        }
     }
 
     /**

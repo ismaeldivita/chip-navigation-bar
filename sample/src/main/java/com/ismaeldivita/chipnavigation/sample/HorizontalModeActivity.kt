@@ -1,5 +1,6 @@
 package com.ismaeldivita.chipnavigation.sample
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -20,7 +21,7 @@ class HorizontalModeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horizontal)
 
-        lastColor = ContextCompat.getColor(this, R.color.blank)
+        lastColor = (container.background as ColorDrawable).color
 
         menu.setOnItemSelectedListener { id ->
             val option = when (id) {
@@ -35,6 +36,12 @@ class HorizontalModeActivity : AppCompatActivity() {
             lastColor = color
 
             title.text = option.second
+        }
+
+
+        if (savedInstanceState == null) {
+            menu.showBadge(R.id.home)
+            menu.showBadge(R.id.settings, 32)
         }
     }
 

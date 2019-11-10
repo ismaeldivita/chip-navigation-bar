@@ -66,7 +66,7 @@ internal class BadgeDrawable(val context: Context) : Drawable() {
 
     override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
 
-    override fun setColorFilter(colorFilter: ColorFilter) {}
+    override fun setColorFilter(colorFilter: ColorFilter?) {}
 
     override fun draw(canvas: Canvas) {
         if (!shapeDrawable.bounds.isEmpty) {
