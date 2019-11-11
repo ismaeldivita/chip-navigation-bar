@@ -185,6 +185,7 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param id menu item id
      */
     fun dismissBadge(id: Int) {
+        badgesState.remove(id)
         getItemById(id)?.dismissBadge()
     }
 
