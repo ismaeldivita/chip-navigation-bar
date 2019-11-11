@@ -24,6 +24,7 @@
             android:elevation="16dp"
             app:cnb_minExpandedWidth="150dp"
             app:cnb_addTopInset="true"
+            app:cnb_addLeftInset="true"
             app:cnb_menuResource="@menu/test"
             app:cnb_orientationMode="vertical" />
 
@@ -34,7 +35,7 @@
             android:layout_gravity="end"
             android:tint="#696969"
             android:padding="8dp"
-            android:src="@drawable/ic_arrow_left" />
+            android:src="@drawable/ic_menu" />
 
     </LinearLayout>
 

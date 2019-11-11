@@ -24,6 +24,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     private lateinit var orientationMode: MenuOrientation
     private var listener: OnItemSelectedListener? = null
     private var minimumExpandedWidth: Int = 0
+    private var isExpanded: Boolean = false
 
     @MenuRes
     private var menuRes = -1
@@ -191,6 +192,8 @@ class ChipNavigationBar @JvmOverloads constructor(
      * Collapse the menu items if orientationMode is VERTICAL otherwise, do nothing
      */
     fun collapse() {
+        isExpanded = false
+
         if (orientationMode == MenuOrientation.VERTICAL) {
             forEachChild {
                 it.minimumWidth = 0
@@ -203,12 +206,24 @@ class ChipNavigationBar @JvmOverloads constructor(
      * Expand the menu items if orientationMode is VERTICAL otherwise, do nothing
      */
     fun expand() {
+        isExpanded = true
+
         if (orientationMode == MenuOrientation.VERTICAL) {
             forEachChild {
                 it.minimumWidth = minimumExpandedWidth
                 (it as? VerticalMenuItemView)?.expand()
             }
         }
+    }
+
+    /**
+     * Return a boolean if the menu is expanded on the VERTICAL orientationMode.
+     *
+     * @return true if expanded
+     */
+    fun isExpanded(): Boolean = when (orientationMode) {
+        MenuOrientation.VERTICAL -> isExpanded
+        MenuOrientation.HORIZONTAL -> false
     }
 
     /**
@@ -252,6 +267,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             menuId = menuRes
             selectedItem = getSelectedItemId()
             badges = badgesState
+            expanded = isExpanded
         }
     }
 
@@ -262,6 +278,7 @@ class ChipNavigationBar @JvmOverloads constructor(
 
                 if (state.menuId != -1) setMenuResource(state.menuId)
                 if (state.selectedItem != -1) setItemSelected(state.selectedItem)
+                if (state.expanded) expand() else collapse()
 
                 state.badges.forEach { (itemId, count) ->
                     if (count > 0) {

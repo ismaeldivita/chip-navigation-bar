@@ -20,7 +20,6 @@ class VerticalModeActivity : AppCompatActivity() {
     private val menu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
 
     private var lastColor: Int = 0
-    private var isExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +44,13 @@ class VerticalModeActivity : AppCompatActivity() {
         })
 
         button.setOnClickListener {
-            if (isExpanded) {
+            if (menu.isExpanded()) {
                 TransitionManager.beginDelayedTransition(container, ChangeBounds())
                 menu.collapse()
-                button.setImageResource(R.drawable.ic_arrow_right)
             } else {
                 TransitionManager.beginDelayedTransition(container, ChangeBounds())
                 menu.expand()
-                button.setImageResource(R.drawable.ic_arrow_left)
             }
-            isExpanded = !isExpanded
         }
 
         button.applyWindowInsets(bottom = true)

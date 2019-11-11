@@ -35,6 +35,12 @@ internal class State : View.BaseSavedState {
             bundle?.putParcelableArrayList(BADGES, ArrayList(badgeStates))
         }
 
+    var expanded: Boolean
+        get() = bundle?.getBoolean(EXPANDED) ?: false
+        set(value) {
+            bundle?.putBoolean(EXPANDED, value)
+        }
+
     constructor(superState: Parcelable?) : super(superState)
 
     constructor(superState: Parcelable?, bundle: Bundle) : super(superState) {
@@ -54,6 +60,7 @@ internal class State : View.BaseSavedState {
         private const val SELECTED_ITEM = "selectedItem"
         private const val BADGES = "badges"
         private const val MENU_ID = "menuId"
+        private const val EXPANDED = "expanded"
 
         @JvmField
         val CREATOR = object : Parcelable.ClassLoaderCreator<State> {
