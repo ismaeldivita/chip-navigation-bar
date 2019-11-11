@@ -117,13 +117,20 @@ class ChipNavigationBar @JvmOverloads constructor(
      * This event will not be propagated to the current [OnItemSelectedListener]
      *
      * @param id menu item id
+     * @param dispatchAction enable this action to dispatch listener events
      */
-    fun setItemSelected(id: Int) {
+    fun setItemSelected(id: Int, dispatchAction: Boolean = true) {
         val selectedItem = getSelectedItem()
 
         if (selectedItem?.id != id) {
             selectedItem?.isSelected = false
-            getItemById(id)?.isSelected = true
+            getItemById(id)?.let {
+                it.isSelected = true
+
+                if (dispatchAction) {
+                    listener?.onItemSelected(id)
+                }
+            }
         }
     }
 
@@ -278,7 +285,7 @@ class ChipNavigationBar @JvmOverloads constructor(
                 super.onRestoreInstanceState(state.superState)
 
                 if (state.menuId != -1) setMenuResource(state.menuId)
-                if (state.selectedItem != -1) setItemSelected(state.selectedItem)
+                if (state.selectedItem != -1) setItemSelected(state.selectedItem, false)
                 if (state.expanded) expand() else collapse()
 
                 state.badges.forEach { (itemId, count) ->
