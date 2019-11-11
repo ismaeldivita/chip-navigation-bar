@@ -1,7 +1,6 @@
 package com.ismaeldivita.chipnavigation.view
 
 import android.content.Context
-import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -30,10 +29,6 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     init {
         View.inflate(getContext(), R.layout.cnb_horizontal_menu_item, this)
         layoutParams = LayoutParams(0, WRAP_CONTENT, 1F)
-
-        if (context.resources.configuration.orientation == ORIENTATION_LANDSCAPE) {
-            title.visibility = View.VISIBLE
-        }
     }
 
     override fun bind(item: MenuItem) {
@@ -88,23 +83,25 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
+        val isPortrait = context.resources.configuration.orientation == ORIENTATION_PORTRAIT
 
-        if (context.resources.configuration.orientation == ORIENTATION_PORTRAIT) {
-            if (selected) {
-                beginDelayedTransitionOnParent()
+        if (selected) {
+            beginDelayedTransitionOnParent()
+            if (isPortrait) {
                 updateLayoutParams<LinearLayout.LayoutParams> {
                     width = WRAP_CONTENT
                     weight = 0F
                 }
-                title.visibility = View.VISIBLE
-
-            } else {
+            }
+            title.visibility = View.VISIBLE
+        } else {
+            if (isPortrait) {
                 updateLayoutParams<LinearLayout.LayoutParams> {
                     width = 0
                     weight = 1F
                 }
-                title.visibility = View.GONE
             }
+            title.visibility = View.GONE
         }
     }
 
