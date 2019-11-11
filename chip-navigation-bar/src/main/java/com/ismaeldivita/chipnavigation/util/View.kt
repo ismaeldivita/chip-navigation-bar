@@ -1,9 +1,8 @@
 package com.ismaeldivita.chipnavigation.util
 
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.StateListDrawable
+import android.graphics.Color
+import android.graphics.drawable.*
 import android.os.Build
 import android.transition.Transition
 import android.transition.TransitionManager
@@ -21,20 +20,20 @@ internal fun View.setCustomRipple(
     mask: Drawable
 ) {
     val highlightColor = context.getValueFromAttr(android.R.attr.colorControlHighlight)
-
     val colorStateList = ColorStateList.valueOf(highlightColor)
     val unselected = RippleDrawable(colorStateList, null, mask)
-
     val states = StateListDrawable()
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
+        states.addState(intArrayOf(), ColorDrawable(Color.TRANSPARENT))
+        background = states
         foreground = unselected
+    } else {
+        states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
+        states.addState(intArrayOf(), ColorDrawable(Color.TRANSPARENT))
+        background = states
     }
-
-    states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
-    states.addState(intArrayOf(), unselected)
-    background = states
-
 }
 
 /**

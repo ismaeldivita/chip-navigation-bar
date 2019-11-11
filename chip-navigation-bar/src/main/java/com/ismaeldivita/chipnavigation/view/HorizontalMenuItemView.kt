@@ -3,6 +3,7 @@ package com.ismaeldivita.chipnavigation.view
 import android.content.Context
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
@@ -25,6 +26,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     private val title by lazy { findViewById<TextView>(R.id.cbn_item_title) }
     private val icon by lazy { findViewById<BadgeImageView>(R.id.cnb_item_icon) }
     private val container by lazy { findViewById<View>(R.id.cbn_item_internal_container) }
+    private lateinit var mask: Drawable
 
     init {
         View.inflate(getContext(), R.layout.cnb_horizontal_menu_item, this)
@@ -55,11 +57,11 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             cornerRadius = 1000f
             setTint(item.backgroundColor)
         }
-        val containerForeground = GradientDrawable().apply {
+        mask = GradientDrawable().apply {
             cornerRadius = 1000f
             setTint(Color.BLACK)
         }
-        container.setCustomRipple(containerBackground, containerForeground)
+        container.setCustomRipple(containerBackground, mask)
     }
 
     override fun showBadge(count: Int) {
@@ -86,8 +88,14 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
         val isPortrait = context.resources.configuration.orientation == ORIENTATION_PORTRAIT
 
         if (selected) {
+            /** Hack to fix the ripple issue before a scene transition on SDKs < P */
+            container.visibility = View.GONE
+            mask.jumpToCurrentState()
+            container.visibility = View.VISIBLE
+
             beginDelayedTransitionOnParent()
             if (isPortrait) {
+
                 updateLayoutParams<LinearLayout.LayoutParams> {
                     width = WRAP_CONTENT
                     weight = 0F
