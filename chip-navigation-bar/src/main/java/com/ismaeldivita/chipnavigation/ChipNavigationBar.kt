@@ -70,11 +70,7 @@ class ChipNavigationBar @JvmOverloads constructor(
         this.menuRes = menuRes
 
         val menu = (MenuParser(context).parse(menuRes))
-        val childListener: (View) -> Unit = { view ->
-            val id = view.id
-            setItemSelected(id)
-            listener?.onItemSelected(id)
-        }
+        val childListener: (View) -> Unit = { view -> setItemSelected(view.id) }
 
         removeAllViews()
 
