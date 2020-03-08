@@ -1,5 +1,6 @@
 package com.ismaeldivita.chipnavigation.view
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
@@ -34,7 +35,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
 
     private companion object {
         private const val BACKGROUND_CORNER_ANIMATION_DURATION: Long = 250
-        private const val BULLET =  '\u2B24'
+        private const val BULLET = '\u2B24'
     }
 
     init {
@@ -136,15 +137,26 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         }
 
         if (isSelected) {
-            containerBackground.cornerAnimation(0f, radius)
+            containerBackground.cornerAnimation(0f, radius).start()
         } else {
             containerBackground.cornerRadius = radius
         }
     }
 
     private fun styleContainerForExpandedState() {
-        val cornerRadii = floatArrayOf(0f, 0f, radius, radius, radius, radius, 0f, 0f)
+        val cornerArray = if (layoutDirection == View.LAYOUT_DIRECTION_LTR) {
+            floatArrayOf(0f, 0f, radius, radius, radius, radius, 0f, 0f)
+        } else {
+            floatArrayOf(radius, radius, 0f, 0f, 0f, 0f, radius, radius)
+        }
+
+        title.alpha = 0f
         title.visibility = View.VISIBLE
+        title.animate()
+            .alpha(1f)
+            .setStartDelay(200)
+            .start()
+
         countLabel.visibility = View.VISIBLE
         container.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
         icon.updateLayoutParams<MarginLayoutParams> {
@@ -152,24 +164,27 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
             marginEnd = doubleSpace
         }
 
-        containerForeground.cornerRadii = cornerRadii
+        containerForeground.cornerRadii = cornerArray
 
         if (isSelected) {
-            containerBackground.cornerAnimation(radius, 0f)
+            containerBackground.cornerAnimation(radius, 0f).start()
         } else {
-            containerBackground.cornerRadii = cornerRadii
+            containerBackground.cornerRadii = cornerArray
         }
     }
 
-    private fun GradientDrawable.cornerAnimation(from: Float, to: Float) {
+    private fun GradientDrawable.cornerAnimation(from: Float, to: Float): Animator =
         ObjectAnimator.ofFloat(from, to).apply {
             addUpdateListener {
                 val corner = it.animatedValue as Float
-                cornerRadii =
+                val cornerArray = if (layoutDirection == View.LAYOUT_DIRECTION_LTR) {
                     floatArrayOf(corner, corner, radius, radius, radius, radius, corner, corner)
+                } else {
+                    floatArrayOf(radius, radius, corner, corner, corner, corner, radius, radius)
+                }
+
+                cornerRadii = cornerArray
             }
             duration = BACKGROUND_CORNER_ANIMATION_DURATION
-            start()
         }
-    }
 }
