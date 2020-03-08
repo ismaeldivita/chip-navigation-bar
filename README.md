@@ -87,13 +87,15 @@ menu.showBadge(R.id.settings, 10000)
 | `cnb_disabledColor` |color used for the disable state|`R.attr.colorButtonNormal`|
 | `cnb_unselectedColor` |color used for unselected state|`#696969`|
 | `cnb_badgeColor` |color used for the badge|`#F44336`|
+| `cnb_radius` |radius|`Float.MAX_VALUE`|
 
 ```xml
 <menu
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cnb_disabledColor="#606060"
     app:cnb_unselectedColor="@color/my_unselected_color"
-    app:cnb_badgeColor="@color/my_badge_color">
+    app:cnb_badgeColor="@color/my_badge_color"
+    app:cnb_radius="16dp">
     ...
 
 </menu>
