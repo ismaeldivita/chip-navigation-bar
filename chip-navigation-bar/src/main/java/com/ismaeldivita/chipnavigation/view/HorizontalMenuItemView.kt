@@ -54,11 +54,11 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             mode = item.tintMode
         )
         val containerBackground = GradientDrawable().apply {
-            cornerRadius = 1000f
+            cornerRadius = item.radius
             setTint(item.backgroundColor)
         }
         mask = GradientDrawable().apply {
-            cornerRadius = 1000f
+            cornerRadius = item.radius
             setTint(Color.BLACK)
         }
         container.setCustomRipple(containerBackground, mask)

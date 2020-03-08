@@ -2,6 +2,7 @@ package com.ismaeldivita.chipnavigation.model
 
 import android.graphics.PorterDuff
 import androidx.annotation.ColorInt
+import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 
 internal data class MenuItem(
@@ -15,5 +16,6 @@ internal data class MenuItem(
     @ColorInt val backgroundColor: Int,
     @ColorInt val badgeColor: Int = 0,
     @ColorInt val disabledColor: Int = 0,
-    @ColorInt val unselectedColor: Int = 0
+    @ColorInt val unselectedColor: Int = 0,
+    val radius: Float = 0f
 )

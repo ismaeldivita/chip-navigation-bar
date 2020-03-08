@@ -169,7 +169,7 @@ menu.showBadge(R.id.settings, 10000)
 
 **Required**
 - AndroidX - See [migration guide](https://developer.android.com/jetpack/androidx/migrate)
-- Android Lollipop - API Level [23](https://twitter.com/minsdkversion)
+- Android Lollipop - API Level 21
 
 ### Gradle
 

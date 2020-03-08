@@ -51,6 +51,7 @@ internal class MenuParser(private val context: Context) {
         var badgeColor = 0
         var disabledColor = 0
         var unselectedColor = 0
+        var radius = 0f
 
         while (!isEndOfMenu) {
             val name = parser.name
@@ -60,6 +61,7 @@ internal class MenuParser(private val context: Context) {
                     badgeColor = readBadgeColor(sAttr)
                     disabledColor = readDisabledColor(sAttr)
                     unselectedColor = readUnselectedColor(sAttr)
+                    radius = readRadius(sAttr)
                     sAttr.recycle()
                 }
                 eventType == START_TAG && name == XML_MENU_ITEM_TAG -> {
@@ -68,7 +70,8 @@ internal class MenuParser(private val context: Context) {
                         item.copy(
                             badgeColor = badgeColor,
                             disabledColor = disabledColor,
-                            unselectedColor = unselectedColor
+                            unselectedColor = unselectedColor,
+                            radius = radius
                         )
                     )
                 }
@@ -78,12 +81,7 @@ internal class MenuParser(private val context: Context) {
             }
             eventType = parser.next()
         }
-        return Menu(
-            items = items,
-            badgeColor = badgeColor,
-            disabledColor = disabledColor,
-            unselectedColor = unselectedColor
-        )
+        return Menu(items = items)
     }
 
     private fun parseMenuItem(attrs: AttributeSet): MenuItem {
@@ -133,6 +131,11 @@ internal class MenuParser(private val context: Context) {
     private fun readUnselectedColor(sAttr: TypedArray): Int = sAttr.getColor(
         R.styleable.ChipMenu_cnb_unselectedColor,
         ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
+    )
+
+    private fun readRadius(sAttr: TypedArray): Float = sAttr.getDimension(
+        R.styleable.ChipMenu_cnb_radius,
+        Float.MAX_VALUE
     )
 
     private fun readTextActiveColor(sAttr: TypedArray): Int =
