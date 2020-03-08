@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -13,7 +12,6 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import com.ismaeldivita.chipnavigation.R
 import com.ismaeldivita.chipnavigation.model.MenuItem
-import com.ismaeldivita.chipnavigation.util.onEndListener
 import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
 import com.ismaeldivita.chipnavigation.util.setCustomRipple
 import com.ismaeldivita.chipnavigation.util.updateLayoutParams
@@ -32,6 +30,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     private val doubleSpace = resources.getDimension(R.dimen.cnb_double_space).toInt()
     private val originalTypeFace: Typeface
     private var badgeCount = -1
+    private var radius = 0f
 
     private companion object {
         private const val BACKGROUND_CORNER_ANIMATION_DURATION: Long = 250
@@ -47,6 +46,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     override fun bind(item: MenuItem) {
         id = item.id
         isEnabled = item.enabled
+        radius = item.radius
 
         title.text = item.title
         title.setColorStateListAnimator(
@@ -128,7 +128,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     private fun styleContainerForCollapseState() {
         title.visibility = View.GONE
         countLabel.visibility = View.GONE
-        containerForeground.cornerRadius = 1000f
+        containerForeground.cornerRadius = radius
         container.updateLayoutParams<MarginLayoutParams> { marginStart = doubleSpace }
         icon.updateLayoutParams<MarginLayoutParams> {
             marginStart = 0
@@ -136,14 +136,14 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         }
 
         if (isSelected) {
-            containerBackground.cornerAnimation(0f, 1000f)
+            containerBackground.cornerAnimation(0f, radius)
         } else {
-            containerBackground.cornerRadius = 1000f
+            containerBackground.cornerRadius = radius
         }
     }
 
     private fun styleContainerForExpandedState() {
-        val cornerRadii = floatArrayOf(0f, 0f, 1000f, 1000f, 1000f, 1000f, 0f, 0f)
+        val cornerRadii = floatArrayOf(0f, 0f, radius, radius, radius, radius, 0f, 0f)
         title.visibility = View.VISIBLE
         countLabel.visibility = View.VISIBLE
         container.updateLayoutParams<MarginLayoutParams> { marginStart = 0 }
@@ -155,7 +155,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         containerForeground.cornerRadii = cornerRadii
 
         if (isSelected) {
-            containerBackground.cornerAnimation(1000f, 0f)
+            containerBackground.cornerAnimation(radius, 0f)
         } else {
             containerBackground.cornerRadii = cornerRadii
         }
@@ -166,7 +166,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
             addUpdateListener {
                 val corner = it.animatedValue as Float
                 cornerRadii =
-                    floatArrayOf(corner, corner, 1000f, 1000f, 1000f, 1000f, corner, corner)
+                    floatArrayOf(corner, corner, radius, radius, radius, radius, corner, corner)
             }
             duration = BACKGROUND_CORNER_ANIMATION_DURATION
             start()
