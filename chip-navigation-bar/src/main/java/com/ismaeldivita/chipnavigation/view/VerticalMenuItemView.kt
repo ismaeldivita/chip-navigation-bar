@@ -139,9 +139,6 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
             containerBackground.cornerAnimation(0f, 1000f)
         } else {
             containerBackground.cornerRadius = 1000f
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                container.setCustomRipple(containerBackground, containerForeground)
-            }
         }
     }
 
@@ -161,7 +158,6 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
             containerBackground.cornerAnimation(1000f, 0f)
         } else {
             containerBackground.cornerRadii = cornerRadii
-            restoreRippleMaskForLegacy()
         }
     }
 
@@ -172,17 +168,8 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
                 cornerRadii =
                     floatArrayOf(corner, corner, 1000f, 1000f, 1000f, 1000f, corner, corner)
             }
-            onEndListener { restoreRippleMaskForLegacy() }
             duration = BACKGROUND_CORNER_ANIMATION_DURATION
             start()
         }
     }
-
-
-    private fun restoreRippleMaskForLegacy() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            container.setCustomRipple(containerBackground, containerForeground)
-        }
-    }
-
 }

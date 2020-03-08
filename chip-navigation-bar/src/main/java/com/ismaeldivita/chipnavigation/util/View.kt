@@ -24,16 +24,10 @@ internal fun View.setCustomRipple(
     val unselected = RippleDrawable(colorStateList, null, mask)
     val states = StateListDrawable()
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
-        states.addState(intArrayOf(), ColorDrawable(Color.TRANSPARENT))
-        background = states
-        foreground = unselected
-    } else {
-        states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
-        states.addState(intArrayOf(), ColorDrawable(Color.TRANSPARENT))
-        background = states
-    }
+    states.addState(intArrayOf(android.R.attr.state_selected), selectedBackground)
+    states.addState(intArrayOf(), ColorDrawable(Color.TRANSPARENT))
+    background = states
+    foreground = unselected
 }
 
 /**
