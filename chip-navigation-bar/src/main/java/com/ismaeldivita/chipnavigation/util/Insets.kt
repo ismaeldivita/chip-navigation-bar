@@ -15,13 +15,13 @@ internal fun View.applyWindowInsets(left: Boolean, top: Boolean, right: Boolean,
     doOnApplyWindowInset { view, windowInsets, initialPadding ->
         val leftPadding = initialPadding.left +
                 (windowInsets.systemWindowInsetLeft.takeIf { left } ?: 0)
-        val topPaddin = initialPadding.top +
+        val topPadding = initialPadding.top +
                 (windowInsets.systemWindowInsetTop.takeIf { top } ?: 0)
         val rightPadding = initialPadding.right +
                 (windowInsets.systemWindowInsetRight.takeIf { right } ?: 0)
         val bottomPadding = initialPadding.bottom +
                 (windowInsets.systemWindowInsetBottom.takeIf { bottom } ?: 0)
-        view.setPadding(leftPadding, topPaddin, rightPadding, bottomPadding)
+        view.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
     }
 }
 

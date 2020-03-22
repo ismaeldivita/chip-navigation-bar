@@ -23,7 +23,6 @@
             android:id="@+id/cnb_item_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical|start"
             android:layout_marginEnd="@dimen/cnb_double_space"
             android:duplicateParentState="true"
             tools:src="@android:drawable/btn_star_big_off"
@@ -38,7 +37,6 @@
             android:layout_marginStart="@dimen/cnb_double_space"
             android:layout_marginEnd="@dimen/cnb_space"
             android:duplicateParentState="true"
-            android:textStyle="bold"
             android:singleLine="true"
             tools:text="Discover"
             tools:textColor="#FFF" />

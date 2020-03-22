@@ -4,14 +4,18 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
+import androidx.core.content.ContextCompat
 import com.ismaeldivita.chipnavigation.model.MenuParser
+import com.ismaeldivita.chipnavigation.model.MenuStyle
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.util.getChildren
+import com.ismaeldivita.chipnavigation.util.getValueFromAttr
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
@@ -25,6 +29,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     private var listener: OnItemSelectedListener? = null
     private var minimumExpandedWidth: Int = 0
     private var isExpanded: Boolean = false
+    private val menuStyle: MenuStyle
 
     @MenuRes
     private var menuRes = -1
@@ -46,18 +51,36 @@ class ChipNavigationBar @JvmOverloads constructor(
             else -> MenuOrientation.HORIZONTAL
         }
 
-        a.recycle()
+        val textAppearance = a.getResourceId(R.styleable.ChipNavigationBar_cnb_textAppearance, -1)
+        val radius = a.getDimension(R.styleable.ChipNavigationBar_cnb_radius, Float.MAX_VALUE)
+        val badgeColor = a.getColor(
+            R.styleable.ChipNavigationBar_cnb_badgeColor,
+            ContextCompat.getColor(context, R.color.cnb_default_badge_color)
+        )
+        val unselectedColor = a.getColor(
+            R.styleable.ChipNavigationBar_cnb_unselectedColor,
+            context.getValueFromAttr(R.attr.colorButtonNormal)
+        )
+        menuStyle = MenuStyle(
+            badgeColor = badgeColor,
+            unselectedColor = unselectedColor,
+            radius = radius,
+            textAppearance = textAppearance.takeIf { it > 0 }
+        )
 
+        a.recycle()
         setMenuOrientation(orientation)
 
         if (menuResource >= 0) {
             setMenuResource(menuResource)
         }
+        if (orientationMode == MenuOrientation.HORIZONTAL) {
+            gravity = Gravity.CENTER_VERTICAL
+        }
 
         setMinimumExpandedWidth(minExpanded.toInt())
         applyWindowInsets(leftInset, topInset, rightInset, bottomInset)
         collapse()
-
         isClickable = true
     }
 
@@ -69,7 +92,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     fun setMenuResource(@MenuRes menuRes: Int) {
         this.menuRes = menuRes
 
-        val menu = (MenuParser(context).parse(menuRes))
+        val menu = (MenuParser(context).parse(menuRes, menuStyle))
         val childListener: (View) -> Unit = { view -> setItemSelected(view.id) }
 
         removeAllViews()
@@ -86,7 +109,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     /**
      * Set the menu orientation
      *
-     * @param mode orientation
+     * @param menuOrientation orientation
      */
     fun setMenuOrientation(menuOrientation: MenuOrientation) {
         orientationMode = menuOrientation

@@ -36,29 +36,27 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     override fun bind(item: MenuItem) {
         id = item.id
         isEnabled = item.enabled
-
+        item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title
         title.setTextColor(item.textColor)
         title.setColorStateListAnimator(
             color = item.iconColor,
-            unselectedColor = item.unselectedColor,
-            disabledColor = item.disabledColor
+            unselectedColor = item.menuStyle.unselectedColor
         )
 
         icon.setImageResource(item.icon)
-        icon.setBadgeColor(item.badgeColor)
+        icon.setBadgeColor(item.menuStyle.badgeColor)
         icon.setColorStateListAnimator(
             color = item.iconColor,
-            unselectedColor = item.unselectedColor,
-            disabledColor = item.disabledColor,
+            unselectedColor = item.menuStyle.unselectedColor,
             mode = item.tintMode
         )
         val containerBackground = GradientDrawable().apply {
-            cornerRadius = item.radius
+            cornerRadius = item.menuStyle.radius
             setTint(item.backgroundColor)
         }
         mask = GradientDrawable().apply {
-            cornerRadius = item.radius
+            cornerRadius = item.menuStyle.radius
             setTint(Color.BLACK)
         }
         container.setCustomRipple(containerBackground, mask)
@@ -74,8 +72,6 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-
-        icon.jumpDrawablesToCurrentState()
 
         if (!enabled && isSelected) {
             beginDelayedTransitionOnParent()

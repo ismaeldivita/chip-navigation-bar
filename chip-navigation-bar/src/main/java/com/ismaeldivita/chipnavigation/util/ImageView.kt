@@ -38,23 +38,17 @@ internal fun ImageView.colorAnimator(
  *
  * @param color color for selected state
  * @param unselectedColor  color for default state
- * @param disabledColor color for disabled state
  * @param mode PorterDuff.Mode used on color filter
  */
 internal fun ImageView.setColorStateListAnimator(
     @ColorInt color: Int,
     @ColorInt unselectedColor: Int,
-    @ColorInt disabledColor: Int,
     mode: PorterDuff.Mode?
 ) {
     val stateList = StateListAnimator().apply {
         addState(
             intArrayOf(android.R.attr.state_selected),
             colorAnimator(unselectedColor, color, mode, ICON_STATE_ANIMATOR_DURATION)
-        )
-        addState(
-            intArrayOf(android.R.attr.state_enabled.unaryMinus()),
-            colorAnimator(disabledColor, disabledColor, mode, 1)
         )
         addState(
             intArrayOf(),

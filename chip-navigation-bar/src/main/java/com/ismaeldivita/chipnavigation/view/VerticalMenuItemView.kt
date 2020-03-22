@@ -47,27 +47,26 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     override fun bind(item: MenuItem) {
         id = item.id
         isEnabled = item.enabled
-        radius = item.radius
+        radius = item.menuStyle.radius
 
+        item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title
         title.setColorStateListAnimator(
             color = item.textColor,
-            unselectedColor = item.unselectedColor,
-            disabledColor = item.disabledColor
+            unselectedColor = item.menuStyle.unselectedColor
         )
 
+        item.menuStyle.textAppearance?.let(countLabel::setTextAppearance)
         countLabel.setColorStateListAnimator(
             color = item.textColor,
-            unselectedColor = item.unselectedColor,
-            disabledColor = item.disabledColor
+            unselectedColor = item.menuStyle.unselectedColor
         )
 
-        icon.setBadgeColor(item.badgeColor)
+        icon.setBadgeColor(item.menuStyle.badgeColor)
         icon.setImageResource(item.icon)
         icon.setColorStateListAnimator(
             color = item.iconColor,
-            unselectedColor = item.unselectedColor,
-            disabledColor = item.disabledColor,
+            unselectedColor = item.menuStyle.unselectedColor,
             mode = item.tintMode
         )
         containerBackground.setTint(item.backgroundColor)
@@ -101,9 +100,6 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-
-        icon.jumpDrawablesToCurrentState()
-        title.jumpDrawablesToCurrentState()
 
         if (!enabled && isSelected) {
             isSelected = false
