@@ -59,7 +59,7 @@ class ChipNavigationBar @JvmOverloads constructor(
         )
         val unselectedColor = a.getColor(
             R.styleable.ChipNavigationBar_cnb_unselectedColor,
-            context.getValueFromAttr(R.attr.colorButtonNormal)
+            ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
         )
         menuStyle = MenuStyle(
             badgeColor = badgeColor,
