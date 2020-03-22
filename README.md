@@ -80,24 +80,7 @@ menu.showBadge(R.id.settings, 10000)
 ```
 
 ## XML custom attributes
-### Menu xml custom attributes
 
-| attribute|description|default|
-|----------|-------------|------|
-| `cnb_disabledColor` |color used for the disable state|`R.attr.colorButtonNormal`|
-| `cnb_unselectedColor` |color used for unselected state|`#696969`|
-| `cnb_badgeColor` |color used for the badge|`#F44336`|
-
-```xml
-<menu
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cnb_disabledColor="#606060"
-    app:cnb_unselectedColor="@color/my_unselected_color"
-    app:cnb_badgeColor="@color/my_badge_color">
-    ...
-
-</menu>
-```
 ### MenuItem xml custom attributes
 | attribute|description|default|
 |----------|-------------|------ |
@@ -106,7 +89,7 @@ menu.showBadge(R.id.settings, 10000)
 | `android:icon`|icon drawable|**required**|
 | `android:title`|label string|**required**|
 | `cnb_iconColor`|color used to tint the icon on selected state|`R.attr.colorAccent`|
-| `cnb_icontTintMode`|`PorterDuff.Mode` to apply the color. Possible values: [src_over, src_in, src_atop, multiply, screen]|`null`|
+| `cnb_iconTintMode`|`PorterDuff.Mode` to apply the color. Possible values: [src_over, src_in, src_atop, multiply, screen]|`null`|
 | `cnb_textColor`|color used for the label on selected state|same color used for `cnb_iconColor`|
 | `cnb_backgroundColor`|color used for the chip background|same color used for `cnb_iconColor` with 15% alpha
 
@@ -133,12 +116,17 @@ menu.showBadge(R.id.settings, 10000)
 | attribute|description|default|
 |----------|-------------|------ |
 | `cnb_menuResource`|menu resource file|optional since you can set this programmatically|
-| `cnb_orientationMode`|menu orientation. Posisble values: [horizontal, vertical]|horizontal|
+| `cnb_orientationMode`|menu orientation. Possible values: [horizontal, vertical]|horizontal|
 | `cnb_addBottomInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent navigation bar|false|
 | `cnb_addTopInset`|property to enable the sum of the window insets on the current bottom padding, useful when you're using the translucent status bar with the vertical mode|false|
 | `cnb_addLeftInset`|property to enable the sum of the window insets on the current start padding, useful when you're using the translucent navigation bar with landscape|false|
 | `cnb_addRightInset`|property to enable the sum of the window insets on the current end padding, useful when you're using the translucent navigation bar with landscape|false|
 | `cnb_minExpandedWidth`|minimum width for vertical menu when expanded|0
+| `cnb_unselectedColor` |color used for unselected state|`#696969`|
+| `cnb_badgeColor` |color used for the badge|`#F44336`|
+| `cnb_radius` |radius used on the background|`Float.MAX_VALUE` fully rounded|
+| `cnb_iconSize` |menu item icon size|24dp|
+| `cnb_textAppearance` |menu item text appearance|theme default|
 ```xml
 <com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:id="@+id/menu"
@@ -150,7 +138,11 @@ menu.showBadge(R.id.settings, 10000)
     app:cnb_addLeftInset="false"
     app:cnb_addRightInset="false"
     app:cnb_addTopInset="false"
-    app:cnb_minExpandedWidth="150dp" />
+    app:cnb_unselectedColor="@color/my_menu_unselected_color"
+    app:cnb_badgeColor="@color/my_menu_badge_color"
+    app:cnb_radius="8dp"
+    app:cnb_iconSize="24dp"
+    app:cnb_textAppearance="?myThemeTextAppearance"/>
 ```
 ## Public API
 
@@ -169,7 +161,7 @@ menu.showBadge(R.id.settings, 10000)
 
 **Required**
 - AndroidX - See [migration guide](https://developer.android.com/jetpack/androidx/migrate)
-- Android Lollipop - API Level 21
+- Android Marshmallow - API Level [23](https://twitter.com/minsdkversion)
 
 ### Gradle
 
@@ -185,7 +177,7 @@ buildscript {
 Add the library to the dependencies:
 
 ```gradle
-implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
+implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.0'
 ```
  >**Note:** For projects without kotlin, you may need to add `org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion` to your dependencies since this is a Kotlin library.
 
