@@ -49,12 +49,14 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         isEnabled = item.enabled
         radius = item.menuStyle.radius
 
+        item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title
         title.setColorStateListAnimator(
             color = item.textColor,
             unselectedColor = item.menuStyle.unselectedColor
         )
 
+        item.menuStyle.textAppearance?.let(countLabel::setTextAppearance)
         countLabel.setColorStateListAnimator(
             color = item.textColor,
             unselectedColor = item.menuStyle.unselectedColor

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.IntRange
@@ -50,6 +51,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             else -> MenuOrientation.HORIZONTAL
         }
 
+        val textAppearance = a.getResourceId(R.styleable.ChipNavigationBar_cnb_textAppearance, -1)
         val radius = a.getDimension(R.styleable.ChipNavigationBar_cnb_radius, Float.MAX_VALUE)
         val badgeColor = a.getColor(
             R.styleable.ChipNavigationBar_cnb_badgeColor,
@@ -62,7 +64,8 @@ class ChipNavigationBar @JvmOverloads constructor(
         menuStyle = MenuStyle(
             badgeColor = badgeColor,
             unselectedColor = unselectedColor,
-            radius = radius
+            radius = radius,
+            textAppearance = textAppearance.takeIf { it > 0 }
         )
 
         a.recycle()
@@ -71,11 +74,13 @@ class ChipNavigationBar @JvmOverloads constructor(
         if (menuResource >= 0) {
             setMenuResource(menuResource)
         }
+        if (orientationMode == MenuOrientation.HORIZONTAL) {
+            gravity = Gravity.CENTER_VERTICAL
+        }
 
         setMinimumExpandedWidth(minExpanded.toInt())
         applyWindowInsets(leftInset, topInset, rightInset, bottomInset)
         collapse()
-
         isClickable = true
     }
 

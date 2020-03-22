@@ -36,7 +36,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     override fun bind(item: MenuItem) {
         id = item.id
         isEnabled = item.enabled
-
+        item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title
         title.setTextColor(item.textColor)
         title.setColorStateListAnimator(

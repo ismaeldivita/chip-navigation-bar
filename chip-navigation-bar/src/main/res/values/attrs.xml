@@ -14,9 +14,9 @@
         </attr>
 
         <attr name="cnb_badgeColor" format="color" />
-        <attr name="cnb_disabledColor" format="color" />
         <attr name="cnb_unselectedColor" format="color" />
         <attr name="cnb_radius" format="dimension" />
+        <attr name="cnb_textAppearance" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="ChipMenuItem">
