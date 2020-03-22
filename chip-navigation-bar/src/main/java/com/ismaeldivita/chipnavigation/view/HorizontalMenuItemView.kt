@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
@@ -44,6 +45,8 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             unselectedColor = item.menuStyle.unselectedColor
         )
 
+        icon.layoutParams.width = item.menuStyle.iconSize
+        icon.layoutParams.height = item.menuStyle.iconSize
         icon.setImageResource(item.icon)
         icon.setBadgeColor(item.menuStyle.badgeColor)
         icon.setColorStateListAnimator(
@@ -51,6 +54,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             unselectedColor = item.menuStyle.unselectedColor,
             mode = item.tintMode
         )
+
         val containerBackground = GradientDrawable().apply {
             cornerRadius = item.menuStyle.radius
             setTint(item.backgroundColor)
@@ -82,6 +86,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
         val isPortrait = context.resources.configuration.orientation == ORIENTATION_PORTRAIT
+        val childCollapse = (parent as ViewGroup).childCount > 3
 
         if (selected) {
             /** Hack to fix the ripple issue before a scene transition on SDKs < P */
@@ -90,7 +95,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             container.visibility = View.VISIBLE
 
             beginDelayedTransitionOnParent()
-            if (isPortrait) {
+            if (isPortrait && childCollapse) {
 
                 updateLayoutParams<LinearLayout.LayoutParams> {
                     width = WRAP_CONTENT
@@ -99,7 +104,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             }
             title.visibility = View.VISIBLE
         } else {
-            if (isPortrait) {
+            if (isPortrait && childCollapse) {
                 updateLayoutParams<LinearLayout.LayoutParams> {
                     width = 0
                     weight = 1F

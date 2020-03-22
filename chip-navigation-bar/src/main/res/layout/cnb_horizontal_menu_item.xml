@@ -19,8 +19,8 @@
 
         <com.ismaeldivita.chipnavigation.view.BadgeImageView
             android:id="@+id/cnb_item_icon"
-            android:layout_width="@dimen/cnb_icon_size"
-            android:layout_height="@dimen/cnb_icon_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:duplicateParentState="true"
             tools:src="@android:drawable/btn_star_big_off" />

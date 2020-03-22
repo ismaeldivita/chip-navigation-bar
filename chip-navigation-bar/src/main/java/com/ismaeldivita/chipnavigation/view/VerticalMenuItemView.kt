@@ -61,7 +61,8 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
             color = item.textColor,
             unselectedColor = item.menuStyle.unselectedColor
         )
-
+        icon.layoutParams.width = item.menuStyle.iconSize
+        icon.layoutParams.height = item.menuStyle.iconSize
         icon.setBadgeColor(item.menuStyle.badgeColor)
         icon.setImageResource(item.icon)
         icon.setColorStateListAnimator(
