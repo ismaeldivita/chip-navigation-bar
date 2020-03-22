@@ -1,6 +1,5 @@
 package com.ismaeldivita.chipnavigation.util
 
-import android.R
 import android.animation.Animator
 import android.animation.ArgbEvaluator
 import android.animation.StateListAnimator
@@ -15,7 +14,6 @@ private const val TEXT_STATE_ANIMATOR_DURATION: Long = 350
  *
  * @param from start color
  * @param to final color
- * @param mode PorterDuff.Mode used to set the ColorFilter
  * @param durationInMillis animator duration in milliseconds
  * @return a color transition [Animator]
  */
@@ -37,22 +35,15 @@ internal fun TextView.colorAnimator(
  *
  * @param color color for selected state
  * @param unselectedColor  color for default state
- * @param disabledColor color for disabled state
- * @param mode PorterDuff.Mode used on color filter
  */
 internal fun TextView.setColorStateListAnimator(
     @ColorInt color: Int,
-    @ColorInt unselectedColor: Int,
-    @ColorInt disabledColor: Int
+    @ColorInt unselectedColor: Int
 ) {
     val stateList = StateListAnimator().apply {
         addState(
-            intArrayOf(R.attr.state_selected),
+            intArrayOf(android.R.attr.state_selected),
             colorAnimator(unselectedColor, color, TEXT_STATE_ANIMATOR_DURATION)
-        )
-        addState(
-            intArrayOf(R.attr.state_enabled.unaryMinus()),
-            colorAnimator(disabledColor, disabledColor, 1)
         )
         addState(
             intArrayOf(),

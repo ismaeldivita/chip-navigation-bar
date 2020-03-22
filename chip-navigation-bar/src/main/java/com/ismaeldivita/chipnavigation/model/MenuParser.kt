@@ -21,14 +21,14 @@ internal class MenuParser(private val context: Context) {
         const val XML_MENU_ITEM_TAG = "item"
     }
 
-    fun parse(@MenuRes menuRes: Int): Menu {
+    fun parse(@MenuRes menuRes: Int, menuStyle: MenuStyle): Menu {
         @SuppressLint("ResourceType")
         val parser = context.resources.getLayout(menuRes)
         val attrs = Xml.asAttributeSet(parser)
 
         skipMenuTagStart(parser)
 
-        return parseMenu(parser, attrs)
+        return parseMenu(parser, attrs, menuStyle)
     }
 
     private fun skipMenuTagStart(parser: XmlResourceParser) {
@@ -43,37 +43,21 @@ internal class MenuParser(private val context: Context) {
         } while (currentEvent != END_DOCUMENT)
     }
 
-    private fun parseMenu(parser: XmlResourceParser, attrs: AttributeSet): Menu {
+    private fun parseMenu(
+        parser: XmlResourceParser,
+        attrs: AttributeSet,
+        menuStyle: MenuStyle
+    ): Menu {
         val items = mutableListOf<MenuItem>()
         var eventType = parser.eventType
         var isEndOfMenu = false
 
-        var badgeColor = 0
-        var disabledColor = 0
-        var unselectedColor = 0
-        var radius = 0f
-
         while (!isEndOfMenu) {
             val name = parser.name
             when {
-                eventType == START_TAG && name == XML_MENU_TAG -> {
-                    val sAttr = context.obtainStyledAttributes(attrs, R.styleable.ChipMenu)
-                    badgeColor = readBadgeColor(sAttr)
-                    disabledColor = readDisabledColor(sAttr)
-                    unselectedColor = readUnselectedColor(sAttr)
-                    radius = readRadius(sAttr)
-                    sAttr.recycle()
-                }
                 eventType == START_TAG && name == XML_MENU_ITEM_TAG -> {
-                    val item = parseMenuItem(attrs)
-                    items.add(
-                        item.copy(
-                            badgeColor = badgeColor,
-                            disabledColor = disabledColor,
-                            unselectedColor = unselectedColor,
-                            radius = radius
-                        )
-                    )
+                    val item = parseMenuItem(attrs, menuStyle)
+                    items.add(item)
                 }
                 eventType == END_TAG && name == XML_MENU_TAG -> isEndOfMenu = true
                 eventType == END_DOCUMENT -> throw RuntimeException("Unexpected end of document")
@@ -84,7 +68,7 @@ internal class MenuParser(private val context: Context) {
         return Menu(items = items)
     }
 
-    private fun parseMenuItem(attrs: AttributeSet): MenuItem {
+    private fun parseMenuItem(attrs: AttributeSet, menuStyle: MenuStyle): MenuItem {
         val sAttr = context.obtainStyledAttributes(attrs, R.styleable.ChipMenuItem)
 
         val item = MenuItem(
@@ -95,7 +79,8 @@ internal class MenuParser(private val context: Context) {
             iconColor = readIconActiveColor(sAttr),
             tintMode = readIconTintMode(sAttr),
             textColor = readTextActiveColor(sAttr),
-            backgroundColor = readBackgroundColor(sAttr)
+            backgroundColor = readBackgroundColor(sAttr),
+            menuStyle = menuStyle
         )
 
         sAttr.recycle()
@@ -118,25 +103,25 @@ internal class MenuParser(private val context: Context) {
         context.getValueFromAttr(R.attr.colorAccent)
     )
 
-    private fun readBadgeColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipMenu_cnb_badgeColor,
-        ContextCompat.getColor(context, R.color.cnb_default_badge_color)
-    )
-
-    private fun readDisabledColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipMenu_cnb_disabledColor,
-        context.getValueFromAttr(R.attr.colorButtonNormal)
-    )
-
-    private fun readUnselectedColor(sAttr: TypedArray): Int = sAttr.getColor(
-        R.styleable.ChipMenu_cnb_unselectedColor,
-        ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
-    )
-
-    private fun readRadius(sAttr: TypedArray): Float = sAttr.getDimension(
-        R.styleable.ChipMenu_cnb_radius,
-        Float.MAX_VALUE
-    )
+//    private fun readBadgeColor(sAttr: TypedArray): Int = sAttr.getColor(
+//        R.styleable.ChipMenu_cnb_badgeColor,
+//        ContextCompat.getColor(context, R.color.cnb_default_badge_color)
+//    )
+//
+//    private fun readDisabledColor(sAttr: TypedArray): Int = sAttr.getColor(
+//        R.styleable.ChipMenu_cnb_disabledColor,
+//        context.getValueFromAttr(R.attr.colorButtonNormal)
+//    )
+//
+//    private fun readUnselectedColor(sAttr: TypedArray): Int = sAttr.getColor(
+//        R.styleable.ChipMenu_cnb_unselectedColor,
+//        ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
+//    )
+//
+//    private fun readRadius(sAttr: TypedArray): Float = sAttr.getDimension(
+//        R.styleable.ChipMenu_cnb_radius,
+//        Float.MAX_VALUE
+//    )
 
     private fun readTextActiveColor(sAttr: TypedArray): Int =
         sAttr.getColor(
