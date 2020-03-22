@@ -44,6 +44,8 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             unselectedColor = item.menuStyle.unselectedColor
         )
 
+        icon.layoutParams.width = item.menuStyle.iconSize
+        icon.layoutParams.height = item.menuStyle.iconSize
         icon.setImageResource(item.icon)
         icon.setBadgeColor(item.menuStyle.badgeColor)
         icon.setColorStateListAnimator(
@@ -51,6 +53,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             unselectedColor = item.menuStyle.unselectedColor,
             mode = item.tintMode
         )
+
         val containerBackground = GradientDrawable().apply {
             cornerRadius = item.menuStyle.radius
             setTint(item.backgroundColor)

@@ -51,22 +51,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             else -> MenuOrientation.HORIZONTAL
         }
 
-        val textAppearance = a.getResourceId(R.styleable.ChipNavigationBar_cnb_textAppearance, -1)
-        val radius = a.getDimension(R.styleable.ChipNavigationBar_cnb_radius, Float.MAX_VALUE)
-        val badgeColor = a.getColor(
-            R.styleable.ChipNavigationBar_cnb_badgeColor,
-            ContextCompat.getColor(context, R.color.cnb_default_badge_color)
-        )
-        val unselectedColor = a.getColor(
-            R.styleable.ChipNavigationBar_cnb_unselectedColor,
-            ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
-        )
-        menuStyle = MenuStyle(
-            badgeColor = badgeColor,
-            unselectedColor = unselectedColor,
-            radius = radius,
-            textAppearance = textAppearance.takeIf { it > 0 }
-        )
+        menuStyle = MenuStyle(context, a)
 
         a.recycle()
         setMenuOrientation(orientation)
