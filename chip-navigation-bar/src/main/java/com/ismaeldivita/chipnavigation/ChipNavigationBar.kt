@@ -118,8 +118,6 @@ class ChipNavigationBar @JvmOverloads constructor(
      * Remove the selected state from the current item and set the selected state to true
      * for the menu item with the [id]
      *
-     * This event will not be propagated to the current [OnItemSelectedListener]
-     *
      * @param id menu item id
      * @param dispatchAction enable this action to dispatch listener events
      */
