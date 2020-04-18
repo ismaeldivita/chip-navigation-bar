@@ -11,6 +11,9 @@ internal class State : View.BaseSavedState {
     @Parcelize
     private class BadgeState(val itemId: Int, val count: Int) : Parcelable
 
+    @Parcelize
+    private class EnabledState(val itemId: Int, val isEnabled: Boolean) : Parcelable
+
     private var bundle: Bundle? = null
 
     var menuId: Int
@@ -33,6 +36,16 @@ internal class State : View.BaseSavedState {
         set(value) {
             val badgeStates = value.map { (item, count) -> BadgeState(item, count) }
             bundle?.putParcelableArrayList(BADGES, ArrayList(badgeStates))
+        }
+
+    var enabled: Map<Int, Boolean>
+        get() = bundle?.getParcelableArrayList<EnabledState>(ENABLED)
+            ?.associate { it.itemId to it.isEnabled }
+            ?: emptyMap()
+
+        set(value) {
+            val enabledState = value.map { (item, isEnabled) -> EnabledState(item, isEnabled) }
+            bundle?.putParcelableArrayList(ENABLED, ArrayList(enabledState))
         }
 
     var expanded: Boolean
@@ -61,6 +74,7 @@ internal class State : View.BaseSavedState {
         private const val BADGES = "badges"
         private const val MENU_ID = "menuId"
         private const val EXPANDED = "expanded"
+        private const val ENABLED = "enabled"
 
         @JvmField
         val CREATOR = object : Parcelable.ClassLoaderCreator<State> {
