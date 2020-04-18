@@ -103,26 +103,6 @@ internal class MenuParser(private val context: Context) {
         context.getValueFromAttr(R.attr.colorAccent)
     )
 
-//    private fun readBadgeColor(sAttr: TypedArray): Int = sAttr.getColor(
-//        R.styleable.ChipMenu_cnb_badgeColor,
-//        ContextCompat.getColor(context, R.color.cnb_default_badge_color)
-//    )
-//
-//    private fun readDisabledColor(sAttr: TypedArray): Int = sAttr.getColor(
-//        R.styleable.ChipMenu_cnb_disabledColor,
-//        context.getValueFromAttr(R.attr.colorButtonNormal)
-//    )
-//
-//    private fun readUnselectedColor(sAttr: TypedArray): Int = sAttr.getColor(
-//        R.styleable.ChipMenu_cnb_unselectedColor,
-//        ContextCompat.getColor(context, R.color.cnb_default_unselected_color)
-//    )
-//
-//    private fun readRadius(sAttr: TypedArray): Float = sAttr.getDimension(
-//        R.styleable.ChipMenu_cnb_radius,
-//        Float.MAX_VALUE
-//    )
-
     private fun readTextActiveColor(sAttr: TypedArray): Int =
         sAttr.getColor(
             R.styleable.ChipMenuItem_cnb_textColor,
