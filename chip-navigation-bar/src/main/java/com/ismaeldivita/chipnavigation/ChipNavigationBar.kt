@@ -121,23 +121,7 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param isSelected true if this view is selected, false otherwise
      */
     fun setItemSelected(id: Int, isSelected: Boolean = true) {
-        val selectedItem = getSelectedItem()
-
-        when {
-            isSelected && selectedItem?.id != id -> {
-                selectedItem?.isSelected = false
-                getItemById(id)?.let {
-                    it.isSelected = true
-                    listener?.onItemSelected(id)
-                }
-            }
-            !isSelected -> {
-                TransitionManager.beginDelayedTransition(this)
-                getItemById(id)?.let {
-                    it.isSelected = false
-                }
-            }
-        }
+        setItemSelected(id = id, isSelected = isSelected, dispatchAction = true)
     }
 
     /**
@@ -248,6 +232,35 @@ class ChipNavigationBar @JvmOverloads constructor(
     fun getSelectedItemId(): Int = getSelectedItem()?.id ?: -1
 
     /**
+     * Remove the selected state from the current item and set the selected state to true
+     * for the menu item with the [id]
+     *
+     * @param id menu item id
+     * @param isSelected true if this view is selected, false otherwise
+     * @param dispatchAction enable this action to dispatch listener events
+     */
+    private fun setItemSelected(id: Int, isSelected: Boolean, dispatchAction: Boolean) {
+        val selectedItem = getSelectedItem()
+        when {
+            isSelected && selectedItem?.id != id -> {
+                selectedItem?.isSelected = false
+                getItemById(id)?.let {
+                    it.isSelected = true
+                    if (dispatchAction) {
+                        listener?.onItemSelected(id)
+                    }
+                }
+            }
+            !isSelected -> {
+                TransitionManager.beginDelayedTransition(this)
+                getItemById(id)?.let {
+                    it.isSelected = false
+                }
+            }
+        }
+    }
+
+    /**
      * Return the current selected menu item
      *
      * @return the selected menu item view or null if none is selected
@@ -282,6 +295,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             selectedItem = getSelectedItemId()
             badges = badgesState
             expanded = isExpanded
+            enabled = getChildren().map { it.id to it.isEnabled }.toMap()
         }
     }
 
@@ -290,15 +304,35 @@ class ChipNavigationBar @JvmOverloads constructor(
             is State -> {
                 super.onRestoreInstanceState(state.superState)
 
-                if (state.menuId != -1) setMenuResource(state.menuId)
-                if (state.selectedItem != -1) setItemSelected(state.selectedItem, false)
-                if (state.expanded) expand() else collapse()
+                if (state.menuId != -1) {
+                    setMenuResource(state.menuId)
+                }
+
+                if (state.selectedItem != -1) {
+                    setItemSelected(
+                        id = state.selectedItem,
+                        isSelected = true,
+                        dispatchAction = false
+                    )
+                }
+
+                if (state.expanded) {
+                    expand()
+                } else {
+                    collapse()
+                }
 
                 state.badges.forEach { (itemId, count) ->
                     if (count > 0) {
                         showBadge(itemId, count)
                     } else {
                         showBadge(itemId)
+                    }
+                }
+
+                state.enabled.forEach { (itemId, isEnabled) ->
+                    if (!isEnabled) {
+                        getItemById(itemId)?.isEnabled = isEnabled
                     }
                 }
             }
