@@ -3,19 +3,18 @@ package com.ismaeldivita.chipnavigation
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
+import android.transition.TransitionManager
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
-import androidx.core.content.ContextCompat
 import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.model.MenuStyle
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.util.getChildren
-import com.ismaeldivita.chipnavigation.util.getValueFromAttr
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
@@ -119,18 +118,23 @@ class ChipNavigationBar @JvmOverloads constructor(
      * for the menu item with the [id]
      *
      * @param id menu item id
-     * @param dispatchAction enable this action to dispatch listener events
+     * @param isSelected true if this view is selected, false otherwise
      */
-    fun setItemSelected(id: Int, dispatchAction: Boolean = true) {
+    fun setItemSelected(id: Int, isSelected: Boolean = true) {
         val selectedItem = getSelectedItem()
 
-        if (selectedItem?.id != id) {
-            selectedItem?.isSelected = false
-            getItemById(id)?.let {
-                it.isSelected = true
-
-                if (dispatchAction) {
+        when {
+            isSelected && selectedItem?.id != id -> {
+                selectedItem?.isSelected = false
+                getItemById(id)?.let {
+                    it.isSelected = true
                     listener?.onItemSelected(id)
+                }
+            }
+            !isSelected -> {
+                TransitionManager.beginDelayedTransition(this)
+                getItemById(id)?.let {
+                    it.isSelected = false
                 }
             }
         }
