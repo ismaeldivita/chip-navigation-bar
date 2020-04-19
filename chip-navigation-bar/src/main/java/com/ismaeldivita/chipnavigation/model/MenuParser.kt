@@ -74,6 +74,7 @@ internal class MenuParser(private val context: Context) {
         val item = MenuItem(
             id = sAttr.getResourceId(R.styleable.ChipMenuItem_android_id, 0),
             title = sAttr.getText(R.styleable.ChipMenuItem_android_title),
+            contentDescription = sAttr.getText(R.styleable.ChipMenuItem_android_contentDescription),
             icon = sAttr.getResourceId(R.styleable.ChipMenuItem_android_icon, 0),
             enabled = sAttr.getBoolean(R.styleable.ChipMenuItem_android_enabled, true),
             iconColor = readIconActiveColor(sAttr),
