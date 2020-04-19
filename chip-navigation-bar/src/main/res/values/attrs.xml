@@ -25,6 +25,7 @@
         <attr name="android:title" />
         <attr name="android:icon" />
         <attr name="android:enabled" />
+        <attr name="android:contentDescription" />
         <attr name="cnb_iconColor" format="color" />
         <attr name="cnb_iconTintMode">
             <enum name="src_over" value="3" />

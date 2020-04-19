@@ -50,7 +50,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         radius = item.menuStyle.radius
 
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
-        contentDescription = item.title
+        contentDescription = item.contentDescription ?: item.title
 
         item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title

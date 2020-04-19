@@ -38,7 +38,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
         id = item.id
 
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
-        contentDescription = item.title
+        contentDescription = item.contentDescription ?: item.title
 
         isEnabled = item.enabled
         item.menuStyle.textAppearance?.let(title::setTextAppearance)
