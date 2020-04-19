@@ -36,6 +36,10 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 
     override fun bind(item: MenuItem) {
         id = item.id
+
+        importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+        contentDescription = item.contentDescription ?: item.title
+
         isEnabled = item.enabled
         item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title

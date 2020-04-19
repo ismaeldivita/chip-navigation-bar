@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 internal class MenuItem(
     val id: Int,
     val title: CharSequence,
+    val contentDescription: CharSequence?,
     @DrawableRes val icon: Int,
     val enabled: Boolean,
     val tintMode: PorterDuff.Mode?,

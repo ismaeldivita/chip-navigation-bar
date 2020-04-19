@@ -49,6 +49,9 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
         isEnabled = item.enabled
         radius = item.menuStyle.radius
 
+        importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+        contentDescription = item.contentDescription ?: item.title
+
         item.menuStyle.textAppearance?.let(title::setTextAppearance)
         title.text = item.title
         title.setColorStateListAnimator(
