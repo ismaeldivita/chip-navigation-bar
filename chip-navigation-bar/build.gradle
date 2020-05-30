@@ -45,7 +45,7 @@ ext {
     siteUrl = 'https://github.com/ismaeldivita/chip-navigation-bar'
     gitUrl = 'https://github.com/ismaeldivita/chip-navigation-bar.git'
 
-    libraryVersion = '1.3.1'
+    libraryVersion = '1.3.2'
 
     developerId = 'ismaeldivita'
     developerName = 'Ismael Di Vita'
@@ -60,7 +60,7 @@ dependencies {
 
     ext {
         kotlinStd = '1.3.31'
-        appcompat = '1.0.2'
+        appcompat = '1.1.0'
         constraint = '2.0.0-beta6'
         testJunit = '1.1.1-alpha02'
         testEspresso = '3.1.1'
