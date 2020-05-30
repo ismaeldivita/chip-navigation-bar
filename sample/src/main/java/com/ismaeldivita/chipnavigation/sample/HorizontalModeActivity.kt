@@ -44,5 +44,4 @@ class HorizontalModeActivity : AppCompatActivity() {
             menu.showBadge(R.id.settings, 32)
         }
     }
-
 }

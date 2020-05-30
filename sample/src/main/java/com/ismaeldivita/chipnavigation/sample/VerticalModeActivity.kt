@@ -56,5 +56,4 @@ class VerticalModeActivity : AppCompatActivity() {
         button.applyWindowInsets(bottom = true)
 
     }
-
 }
