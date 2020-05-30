@@ -7,14 +7,20 @@ import android.transition.TransitionManager
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
+import androidx.constraintlayout.helper.widget.Flow
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.ismaeldivita.chipnavigation.model.MenuParser
 import com.ismaeldivita.chipnavigation.model.MenuStyle
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.util.getChildren
+import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
@@ -22,7 +28,7 @@ import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
 class ChipNavigationBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
-) : LinearLayout(context, attrs) {
+) : ConstraintLayout(context, attrs) {
 
     private lateinit var orientationMode: MenuOrientation
     private var listener: OnItemSelectedListener? = null
@@ -49,7 +55,6 @@ class ChipNavigationBar @JvmOverloads constructor(
             1 -> MenuOrientation.VERTICAL
             else -> MenuOrientation.HORIZONTAL
         }
-
         menuStyle = MenuStyle(context, a)
 
         a.recycle()
@@ -57,9 +62,6 @@ class ChipNavigationBar @JvmOverloads constructor(
 
         if (menuResource >= 0) {
             setMenuResource(menuResource)
-        }
-        if (orientationMode == MenuOrientation.HORIZONTAL) {
-            gravity = Gravity.CENTER_VERTICAL
         }
 
         setMinimumExpandedWidth(minExpanded.toInt())
@@ -82,12 +84,19 @@ class ChipNavigationBar @JvmOverloads constructor(
         removeAllViews()
 
         menu.items.forEach {
-            val itemView = createMenuItem().apply {
-                bind(it)
-                setOnClickListener(childListener)
-            }
-            addView(itemView)
+            createMenuItem()
+                .apply {
+                    bind(it)
+                    setOnClickListener(childListener)
+                }
+                .also(::addView)
         }
+
+        when (orientationMode) {
+            MenuOrientation.HORIZONTAL -> getHorizontalFlow()
+            MenuOrientation.VERTICAL -> getVerticalFlow()
+        }.apply { referencedIds = menu.items.map { it.id }.toIntArray() }
+            .also(::addView)
     }
 
     /**
@@ -97,10 +106,6 @@ class ChipNavigationBar @JvmOverloads constructor(
      */
     fun setMenuOrientation(menuOrientation: MenuOrientation) {
         orientationMode = menuOrientation
-        orientation = when (menuOrientation) {
-            MenuOrientation.HORIZONTAL -> HORIZONTAL
-            MenuOrientation.VERTICAL -> VERTICAL
-        }
     }
 
     /**
@@ -241,10 +246,12 @@ class ChipNavigationBar @JvmOverloads constructor(
      */
     private fun setItemSelected(id: Int, isSelected: Boolean, dispatchAction: Boolean) {
         val selectedItem = getSelectedItem()
+
         when {
             isSelected && selectedItem?.id != id -> {
                 selectedItem?.isSelected = false
                 getItemById(id)?.let {
+                    TransitionManager.beginDelayedTransition(this)
                     it.isSelected = true
                     if (dispatchAction) {
                         listener?.onItemSelected(id)
@@ -252,8 +259,8 @@ class ChipNavigationBar @JvmOverloads constructor(
                 }
             }
             !isSelected -> {
-                TransitionManager.beginDelayedTransition(this)
                 getItemById(id)?.let {
+                    TransitionManager.beginDelayedTransition(this)
                     it.isSelected = false
                 }
             }
@@ -287,6 +294,18 @@ class ChipNavigationBar @JvmOverloads constructor(
         MenuOrientation.VERTICAL -> VerticalMenuItemView(context)
     }
 
+    private fun getHorizontalFlow() = Flow(context).apply {
+        setOrientation(Flow.HORIZONTAL)
+        setHorizontalStyle(Flow.CHAIN_SPREAD)
+        setHorizontalAlign(Flow.HORIZONTAL_ALIGN_START)
+        layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+    }
+
+    private fun getVerticalFlow() = Flow(context).apply {
+        setOrientation(Flow.VERTICAL)
+        setHorizontalAlign(Flow.HORIZONTAL_ALIGN_START)
+        layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+    }
 
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()

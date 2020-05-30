@@ -8,16 +8,14 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.LinearLayout
-import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import com.ismaeldivita.chipnavigation.R
 import com.ismaeldivita.chipnavigation.model.MenuItem
 import com.ismaeldivita.chipnavigation.util.beginDelayedTransitionOnParent
 import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
 import com.ismaeldivita.chipnavigation.util.setCustomRipple
-import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 
 internal class HorizontalMenuItemView @JvmOverloads constructor(
     context: Context,
@@ -31,7 +29,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
 
     init {
         View.inflate(getContext(), R.layout.cnb_horizontal_menu_item, this)
-        layoutParams = LayoutParams(0, WRAP_CONTENT, 1F)
+        layoutParams = LayoutParams(WRAP_CONTENT, MATCH_PARENT)
     }
 
     override fun bind(item: MenuItem) {
@@ -97,23 +95,23 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
             container.visibility = View.GONE
             mask.jumpToCurrentState()
             container.visibility = View.VISIBLE
-
-            beginDelayedTransitionOnParent()
-            if (isPortrait && childCollapse) {
-
-                updateLayoutParams<LinearLayout.LayoutParams> {
-                    width = WRAP_CONTENT
-                    weight = 0F
-                }
-            }
+//
+//            beginDelayedTransitionOnParent()
+//            if (isPortrait && childCollapse) {
+//
+//                updateLayoutParams<LinearLayout.LayoutParams> {
+//                    width = WRAP_CONTENT
+//                    weight = 0F
+//                }
+//            }
             title.visibility = View.VISIBLE
         } else {
-            if (isPortrait && childCollapse) {
-                updateLayoutParams<LinearLayout.LayoutParams> {
-                    width = 0
-                    weight = 1F
-                }
-            }
+//            if (isPortrait && childCollapse) {
+//                updateLayoutParams<LinearLayout.LayoutParams> {
+//                    width = 0
+//                    weight = 1F
+//                }
+//            }
             title.visibility = View.GONE
         }
     }
