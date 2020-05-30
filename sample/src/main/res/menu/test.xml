@@ -11,7 +11,7 @@
     <item
         android:id="@+id/activity"
         android:icon="@drawable/ic_activity"
-        android:title="Activityyyyyyyy"
+        android:title="Activity"
         app:cnb_iconColor="@color/activity"/>
 
     <item

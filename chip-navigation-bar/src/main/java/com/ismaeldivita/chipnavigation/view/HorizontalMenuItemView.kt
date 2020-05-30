@@ -80,38 +80,20 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
         super.setEnabled(enabled)
 
         if (!enabled && isSelected) {
-            beginDelayedTransitionOnParent()
             isSelected = false
         }
     }
 
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
-        val isPortrait = context.resources.configuration.orientation == ORIENTATION_PORTRAIT
-        val childCollapse = (parent as ViewGroup).childCount > 3
 
         if (selected) {
             /** Hack to fix the ripple issue before a scene transition on SDKs < P */
             container.visibility = View.GONE
             mask.jumpToCurrentState()
             container.visibility = View.VISIBLE
-//
-//            beginDelayedTransitionOnParent()
-//            if (isPortrait && childCollapse) {
-//
-//                updateLayoutParams<LinearLayout.LayoutParams> {
-//                    width = WRAP_CONTENT
-//                    weight = 0F
-//                }
-//            }
             title.visibility = View.VISIBLE
         } else {
-//            if (isPortrait && childCollapse) {
-//                updateLayoutParams<LinearLayout.LayoutParams> {
-//                    width = 0
-//                    weight = 1F
-//                }
-//            }
             title.visibility = View.GONE
         }
     }
