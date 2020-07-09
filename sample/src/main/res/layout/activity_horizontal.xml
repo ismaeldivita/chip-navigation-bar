@@ -24,6 +24,7 @@
         android:layout_gravity="bottom"
         android:background="@color/white"
         android:elevation="16dp"
+        android:padding="8dp"
         app:cnb_addBottomInset="true"
         app:cnb_addLeftInset="true"
         app:cnb_addRightInset="true"
