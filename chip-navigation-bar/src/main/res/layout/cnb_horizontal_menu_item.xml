@@ -12,9 +12,11 @@
         android:layout_gravity="center"
         android:duplicateParentState="true"
         android:gravity="start"
-        android:layout_margin="@dimen/cnb_space"
         android:orientation="horizontal"
-        android:padding="@dimen/cnb_medium_space"
+        android:paddingStart="@dimen/cnb_space_3"
+        android:paddingTop="@dimen/cnb_space_1"
+        android:paddingEnd="@dimen/cnb_space_3"
+        android:paddingBottom="@dimen/cnb_space_1"
         tools:background="#000">
 
         <com.ismaeldivita.chipnavigation.view.BadgeImageView
@@ -30,8 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/cnb_space"
-            android:layout_marginEnd="@dimen/cnb_space"
+            android:layout_marginStart="@dimen/cnb_space_1"
             android:duplicateParentState="true"
             android:singleLine="true"
             android:visibility="gone"

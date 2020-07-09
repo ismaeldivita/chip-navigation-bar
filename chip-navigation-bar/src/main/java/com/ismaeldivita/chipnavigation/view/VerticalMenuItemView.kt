@@ -28,7 +28,7 @@ internal class VerticalMenuItemView @JvmOverloads constructor(
     private val container by lazy { findViewById<View>(R.id.cbn_item_internal_container) }
     private val containerBackground = GradientDrawable()
     private val containerForeground = GradientDrawable()
-    private val doubleSpace = resources.getDimension(R.dimen.cnb_double_space).toInt()
+    private val doubleSpace = resources.getDimension(R.dimen.cnb_space_2).toInt()
     private val originalTypeFace: Typeface
     private var badgeCount = -1
     private var radius = 0f
