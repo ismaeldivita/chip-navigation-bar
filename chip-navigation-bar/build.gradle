@@ -61,7 +61,7 @@ dependencies {
     ext {
         kotlinStd = '1.3.31'
         appcompat = '1.1.0'
-        constraint = '2.0.0-beta6'
+        constraint = '2.0.0-beta8'
         testJunit = '1.1.1-alpha02'
         testEspresso = '3.1.1'
         testRunner = '1.1.1'
