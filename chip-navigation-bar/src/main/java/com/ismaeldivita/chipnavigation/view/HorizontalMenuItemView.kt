@@ -43,7 +43,7 @@ internal class HorizontalMenuItemView @JvmOverloads constructor(
         title.text = item.title
         title.setTextColor(item.textColor)
         title.setColorStateListAnimator(
-            color = item.iconColor,
+            color = item.textColor,
             unselectedColor = item.menuStyle.unselectedColor
         )
 
