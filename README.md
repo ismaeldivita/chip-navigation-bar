@@ -1,3 +1,5 @@
+[![Release](https://jitpack.io/v/ismaeldivita/chip-navigation-bar.svg)](https://jitpack.io/#ismaeldivita/chip-navigation-bar)
+
 # Chip Navigation Bar
 A navigation bar widget inspired on Google [Bottom Navigation](https://material.io/design/components/bottom-navigation.html) mixed with [Chips](https://material.io/design/components/chips.html) component.
 
