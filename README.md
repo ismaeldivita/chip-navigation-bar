@@ -1,4 +1,3 @@
-[ ![Download](https://api.bintray.com/packages/ismaeldivita/maven/chip-navigation-bar/images/download.svg) ](https://bintray.com/ismaeldivita/maven/chip-navigation-bar/_latestVersion) &nbsp;&nbsp;&nbsp; [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Chip%20Navigation%20Bar-green.svg?style=flat )]( https://android-arsenal.com/details/1/7707 )
 # Chip Navigation Bar
 A navigation bar widget inspired on Google [Bottom Navigation](https://material.io/design/components/bottom-navigation.html) mixed with [Chips](https://material.io/design/components/chips.html) component.
 
@@ -165,14 +164,14 @@ menu.showBadge(R.id.settings, 10000)
 
 ### Gradle
 
-Make sure that the repositories section includes JCenter
+Make sure that the repositories section includes Jitpack
 ```gradle
-buildscript {
-    ...
+allprojects {
     repositories {
-        jcenter()
         ...
+        maven { url 'https://jitpack.io' }
     }
+}
 ```
 Add the library to the dependencies:
 

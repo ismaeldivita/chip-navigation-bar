@@ -53,25 +53,3 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
-bintray {
-    user = project.properties.get("bintray.user")
-    key = project.properties.get("bintray.apikey")
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        dryRun = false
-        publish = true
-        override = false
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-        }
-    }
-}

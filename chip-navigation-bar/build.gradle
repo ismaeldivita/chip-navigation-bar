@@ -33,9 +33,6 @@ android {
 }
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'chip-navigation-bar'
-
     publishedGroupId = 'com.ismaeldivita.chipnavigation'
     libraryName = 'Chip Navigation Bar'
     artifact = 'chip-navigation-bar'
