@@ -168,12 +168,21 @@ menu.showBadge(R.id.settings, 10000)
 
 Make sure that the repositories section includes Jitpack
 ```gradle
+//project label build.gradle
 allprojects {
     repositories {
         ...
         maven { url 'https://jitpack.io' }
     }
 }
+
+buildscript {
+    repositories {
+         ....
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 ```
 Add the library to the dependencies:
 
