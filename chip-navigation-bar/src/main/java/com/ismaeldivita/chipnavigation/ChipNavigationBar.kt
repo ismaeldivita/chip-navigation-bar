@@ -244,7 +244,7 @@ class ChipNavigationBar @JvmOverloads constructor(
      * @param isSelected true if this view is selected, false otherwise
      * @param dispatchAction enable this action to dispatch listener events
      */
-    private fun setItemSelected(id: Int, isSelected: Boolean, dispatchAction: Boolean) {
+    fun setItemSelected(id: Int, isSelected: Boolean, dispatchAction: Boolean) {
         val selectedItem = getSelectedItem()
 
         when {
