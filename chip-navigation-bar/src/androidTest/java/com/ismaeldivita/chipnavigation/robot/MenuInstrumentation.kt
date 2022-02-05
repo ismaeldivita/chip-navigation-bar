@@ -3,13 +3,13 @@ package com.ismaeldivita.chipnavigation.robot
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.test.rule.ActivityTestRule
-import com.agoda.kakao.common.views.KSwipeView
-import com.agoda.kakao.common.views.KView
-import com.agoda.kakao.image.KImageView
-import com.agoda.kakao.screen.Screen
-import com.agoda.kakao.text.KTextView
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.ismaeldivita.chipnavigation.R
+import io.github.kakaocup.kakao.common.views.KSwipeView
+import io.github.kakaocup.kakao.common.views.KView
+import io.github.kakaocup.kakao.image.KImageView
+import io.github.kakaocup.kakao.screen.Screen
+import io.github.kakaocup.kakao.text.KTextView
 import com.ismaeldivita.chipnavigation.test.R as testR
 
 class MenuInstrumentation(private val activity: MenuTestActivity) : Screen<MenuInstrumentation>() {
