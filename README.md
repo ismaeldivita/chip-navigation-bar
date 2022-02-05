@@ -128,6 +128,7 @@ menu.showBadge(R.id.settings, 10000)
 | `cnb_radius` |radius used on the background|`Float.MAX_VALUE` fully rounded|
 | `cnb_iconSize` |menu item icon size|24dp|
 | `cnb_textAppearance` |menu item text appearance|theme default|
+| `cnb_animationDuration` |animation duration|theme default|
 ```xml
 <com.ismaeldivita.chipnavigation.ChipNavigationBar
     android:id="@+id/menu"
@@ -143,7 +144,8 @@ menu.showBadge(R.id.settings, 10000)
     app:cnb_badgeColor="@color/my_menu_badge_color"
     app:cnb_radius="8dp"
     app:cnb_iconSize="24dp"
-    app:cnb_textAppearance="?myThemeTextAppearance"/>
+    app:cnb_textAppearance="?myThemeTextAppearance"
+    app:cnb_animationDuration="175">
 ```
 ## Public API
 
@@ -158,6 +160,7 @@ menu.showBadge(R.id.settings, 10000)
 |`expand()`|Expand the menu items if orientationMode is VERTICAL otherwise, do nothing|
 |`showBadge(id: Int)`|Display a numberless badge for the menu item with the [id]|
 |`showBadge(id: Int, count: Int)`|Display a countable badge with for the menu item with the [id]|
+|`setDuration(duration: Long)`|Set a custom animation duration|
 ## Installation
 
 **Required**

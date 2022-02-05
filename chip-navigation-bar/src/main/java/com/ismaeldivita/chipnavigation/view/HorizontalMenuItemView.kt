@@ -1,19 +1,16 @@
 package com.ismaeldivita.chipnavigation.view
 
 import android.content.Context
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import com.ismaeldivita.chipnavigation.R
 import com.ismaeldivita.chipnavigation.model.MenuItem
-import com.ismaeldivita.chipnavigation.util.beginDelayedTransitionOnParent
 import com.ismaeldivita.chipnavigation.util.setColorStateListAnimator
 import com.ismaeldivita.chipnavigation.util.setCustomRipple
 
