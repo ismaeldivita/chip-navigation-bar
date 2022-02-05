@@ -18,6 +18,7 @@
         <attr name="cnb_radius" format="dimension" />
         <attr name="cnb_textAppearance" format="reference" />
         <attr name="cnb_iconSize" format="dimension" />
+        <attr name="cnb_animationDuration" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ChipMenuItem">

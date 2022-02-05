@@ -28,6 +28,12 @@ internal class State : View.BaseSavedState {
             bundle?.putInt(SELECTED_ITEM, value)
         }
 
+    var animationDuration: Long
+        get() = bundle?.getLong(ANIMATION_DURATION) ?: -1
+        set(value) {
+            bundle?.putLong(ANIMATION_DURATION, value)
+        }
+
     var badges: Map<Int, Int>
         get() = bundle?.getParcelableArrayList<BadgeState>(BADGES)
             ?.associate { it.itemId to it.count }
@@ -75,6 +81,7 @@ internal class State : View.BaseSavedState {
         private const val MENU_ID = "menuId"
         private const val EXPANDED = "expanded"
         private const val ENABLED = "enabled"
+        private const val ANIMATION_DURATION = "animationDuration"
 
         @JvmField
         val CREATOR = object : Parcelable.ClassLoaderCreator<State> {

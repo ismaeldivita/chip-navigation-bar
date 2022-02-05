@@ -3,14 +3,13 @@ package com.ismaeldivita.chipnavigation
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
+import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.MenuRes
 import androidx.constraintlayout.helper.widget.Flow
@@ -20,7 +19,6 @@ import com.ismaeldivita.chipnavigation.model.MenuStyle
 import com.ismaeldivita.chipnavigation.util.applyWindowInsets
 import com.ismaeldivita.chipnavigation.util.forEachChild
 import com.ismaeldivita.chipnavigation.util.getChildren
-import com.ismaeldivita.chipnavigation.util.updateLayoutParams
 import com.ismaeldivita.chipnavigation.view.HorizontalMenuItemView
 import com.ismaeldivita.chipnavigation.view.MenuItemView
 import com.ismaeldivita.chipnavigation.view.VerticalMenuItemView
@@ -35,6 +33,7 @@ class ChipNavigationBar @JvmOverloads constructor(
     private var minimumExpandedWidth: Int = 0
     private var isExpanded: Boolean = false
     private val menuStyle: MenuStyle
+    private var customAnimationDuration: Long? = null
 
     @MenuRes
     private var menuRes = -1
@@ -55,6 +54,11 @@ class ChipNavigationBar @JvmOverloads constructor(
             1 -> MenuOrientation.VERTICAL
             else -> MenuOrientation.HORIZONTAL
         }
+
+        customAnimationDuration = a.getInt(R.styleable.ChipNavigationBar_cnb_animationDuration, -1)
+            .takeIf { it >= 0 }
+            ?.toLong()
+
         menuStyle = MenuStyle(context, a)
 
         a.recycle()
@@ -161,6 +165,15 @@ class ChipNavigationBar @JvmOverloads constructor(
     }
 
     /**
+     * Set a custom animation duration
+     *
+     * @param duration Animation duration in ms
+     */
+    fun setDuration(duration: Long) {
+        this.customAnimationDuration = duration
+    }
+
+    /**
      * Display a notification numberless badge for a menu item
      *
      * @param id menu item id
@@ -251,7 +264,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             isSelected && selectedItem?.id != id -> {
                 selectedItem?.isSelected = false
                 getItemById(id)?.let {
-                    TransitionManager.beginDelayedTransition(this)
+                    beginAnimation()
                     it.isSelected = true
                     if (dispatchAction) {
                         listener?.onItemSelected(id)
@@ -260,7 +273,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             }
             !isSelected -> {
                 getItemById(id)?.let {
-                    TransitionManager.beginDelayedTransition(this)
+                    beginAnimation()
                     it.isSelected = false
                 }
             }
@@ -307,6 +320,13 @@ class ChipNavigationBar @JvmOverloads constructor(
         layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
     }
 
+    private fun beginAnimation() {
+        val transition = AutoTransition().apply {
+            customAnimationDuration?.let(::setDuration)
+        }
+        TransitionManager.beginDelayedTransition(this, transition)
+    }
+
     override fun onSaveInstanceState(): Parcelable? {
         val superState = super.onSaveInstanceState()
         return State(superState, Bundle()).apply {
@@ -315,6 +335,7 @@ class ChipNavigationBar @JvmOverloads constructor(
             badges = badgesState
             expanded = isExpanded
             enabled = getChildren().map { it.id to it.isEnabled }.toMap()
+            animationDuration = customAnimationDuration ?: -1
         }
     }
 
@@ -353,6 +374,11 @@ class ChipNavigationBar @JvmOverloads constructor(
                     if (!isEnabled) {
                         getItemById(itemId)?.isEnabled = isEnabled
                     }
+                }
+
+
+                if (state.animationDuration >= 0) {
+                    setDuration(state.animationDuration)
                 }
             }
             else -> super.onRestoreInstanceState(state)
