@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:tint="#696969"
+            app:tint="#696969"
             android:padding="8dp"
             android:src="@drawable/ic_menu" />
 

@@ -4,10 +4,10 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'maven-publish'
 
 group = 'com.github.ismaeldivita'
+version = '1.4.0'
 
 android {
     compileSdkVersion 31
-
 
     defaultConfig {
         minSdkVersion 23
@@ -51,4 +51,17 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit-ktx:$testJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testEspresso"
     androidTestImplementation "io.github.kakaocup:kakao:$kakao"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.ismaeldivita'
+                artifactId = 'chip-navigation-bar'
+                version = '1.4.0'
+            }
+        }
+    }
 }
