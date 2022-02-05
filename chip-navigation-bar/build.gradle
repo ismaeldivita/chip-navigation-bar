@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'maven-publish'
 
+group = 'com.github.ismaeldivita'
+
 android {
     compileSdkVersion 31
 

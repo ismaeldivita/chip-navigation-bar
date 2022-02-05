@@ -14,7 +14,8 @@
 
         <activity android:name="com.ismaeldivita.chipnavigation.sample.HorizontalModeActivity"/>
         <activity android:name="com.ismaeldivita.chipnavigation.sample.VerticalModeActivity"/>
-        <activity android:name="com.ismaeldivita.chipnavigation.sample.MainActivity">
+        <activity android:name="com.ismaeldivita.chipnavigation.sample.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
